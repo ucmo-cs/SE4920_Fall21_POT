@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springboot.repository.*;
 import springboot.service.OrganizationService;
+import springboot.service.ScheduleService;
 import springboot.service.UserService;
 
 import javax.persistence.EntityManager;
@@ -45,6 +46,15 @@ public class SpringConfig {
     @Bean
     public Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository(){
         return new Supervisor_SubordinateRepository(em);
+    }
+
+    @Bean
+    public ScheduleRepositoryInterface scheduleRepository(){
+        return new ScheduleRepository(em);
+    }
+    @Bean
+    public ScheduleService scheduleService(){
+        return new ScheduleService(scheduleRepository());
     }
 
 

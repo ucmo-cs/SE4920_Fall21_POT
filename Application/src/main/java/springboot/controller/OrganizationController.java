@@ -18,16 +18,16 @@ public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
-    @PostMapping
+    @PostMapping("/organization/new")
     public Organization saveOrganization(@RequestBody Organization organization){
         Optional<Organization> optionalOrganization = organizationService.save(organization);
         return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
     }
 
-    @GetMapping
-    public List<Organization> listAllOrganizations(){
+    @GetMapping("/organizations")
+    public List<Organization> listAll(){
         List<Organization> list = new ArrayList<>();
-        organizationService.getAll();
+        organizationService.getAll().iterator().forEachRemaining(list::add);
         return list;
     }
 
@@ -64,10 +64,11 @@ public class OrganizationController {
         organizationService.addUserToOrganization(orgUser);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/organization/{id}")
     public void delete(@PathVariable int id) {
         organizationService.deleteById(id);
     }
+
     @DeleteMapping("/organization/user/remove")
     public void removeUserFromOrganization(@RequestBody Org_User orgUser) {
         organizationService.deleteUserFromOrganization(orgUser);
