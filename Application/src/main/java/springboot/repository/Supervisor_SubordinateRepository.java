@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import springboot.domain.Supervisor_Subordinate;
 import springboot.domain.User;
 
 import javax.persistence.EntityManager;
@@ -23,22 +24,22 @@ public class Supervisor_SubordinateRepository extends RepositoryGeneric implemen
     }
 
     @Override
-    public Optional<User> addSupervisor(int userId, int supervisorId) {
+    public Optional<User> addSupervisor(Supervisor_Subordinate supervisorSubordinate) {
         return Optional.empty();
     }
 
     @Override
-    public List<User> addSubordinate(int userId, int subordinateId) {
+    public List<User> addSubordinate(Supervisor_Subordinate supervisorSubordinate) {
         return null;
     }
 
     @Override
-    public Optional<User> deleteSupervisor(int userId, int supervisorId) {
+    public Optional<User> deleteSupervisor(Supervisor_Subordinate supervisorSubordinate) {
         return Optional.empty();
     }
 
     @Override
-    public List<User> deleteSubordinate(int userId, int subordinateId) {
+    public List<User> deleteSubordinate(Supervisor_Subordinate supervisorSubordinate) {
         return null;
     }
 }

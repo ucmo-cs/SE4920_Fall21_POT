@@ -5,21 +5,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "org_user")
 public class Org_User {
-    /*
 
+    /*
     Id : int unique identifier
     Id : int unique user
-
      */
 
     @Id
-    private int orgId;
+    private int org_id;
     @Id
-    private int userId;
+    private int user_id;
 
     public Org_User(int orgId, int userId) {
-        this.orgId = orgId;
-        this.userId = userId;
+        this.org_id = orgId;
+        this.user_id = userId;
     }
 
     public Org_User() {
@@ -29,25 +28,25 @@ public class Org_User {
     @Override
     public String toString() {
         return "Org_User{" +
-                "orgId=" + orgId +
-                ", userId='" + userId + '\'' +
+                "orgId=" + org_id +
+                ", userId='" + user_id + '\'' +
                 '}';
     }
 
     public int getOrgId() {
-        return orgId;
+        return org_id;
     }
 
     public void setOrgId(int orgId) {
-        this.orgId = orgId;
+        this.org_id = orgId;
     }
 
     public int getUserId() {
-        return userId;
+        return user_id;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.user_id = userId;
     }
 
 }

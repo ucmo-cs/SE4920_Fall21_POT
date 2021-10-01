@@ -2,6 +2,7 @@ package springboot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springboot.domain.Org_User;
 import springboot.domain.Organization;
 import springboot.domain.User;
 import springboot.repository.Org_UserRepositoryInterface;
@@ -49,4 +50,14 @@ public class OrganizationService {
         List<User> users = this.org_userRepository.getUsersByOrganization(org);
         return users;
     }
+
+    public Optional<User> addUserToOrganization(Org_User orgUser) {
+        return org_userRepository.addUserToOrganization(orgUser);
+    }
+
+    public Optional<User> deleteUserFromOrganization(Org_User orgUser) {
+        return org_userRepository.deleteUserFromOrganization(orgUser);
+    }
+
+
 }

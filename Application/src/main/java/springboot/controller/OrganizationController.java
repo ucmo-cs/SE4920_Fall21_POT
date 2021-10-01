@@ -2,6 +2,7 @@ package springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springboot.domain.Org_User;
 import springboot.domain.Organization;
 import springboot.domain.User;
 import springboot.service.OrganizationService;
@@ -58,8 +59,18 @@ public class OrganizationController {
         return orgUpdate;
     }
 
+    @PutMapping("/organization/user/add")
+    public void addUserToOrganization(@RequestBody Org_User orgUser) {
+        organizationService.addUserToOrganization(orgUser);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
         organizationService.deleteById(id);
-     }
+    }
+    @DeleteMapping("/organization/user/remove")
+    public void removeUserFromOrganization(@RequestBody Org_User orgUser) {
+        organizationService.deleteUserFromOrganization(orgUser);
+    }
+
 }

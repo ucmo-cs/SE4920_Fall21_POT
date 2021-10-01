@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import springboot.domain.Org_User;
 import springboot.domain.Organization;
 import springboot.domain.User;
 
@@ -21,5 +22,15 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
     @Override
     public List<User> getUsersByOrganization(Organization organization) {
         return null;
+    }
+
+    @Override
+    public Optional<User> addUserToOrganization(Org_User orgUser) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> deleteUserFromOrganization(Org_User orgUser) {
+        return Optional.empty();
     }
 }

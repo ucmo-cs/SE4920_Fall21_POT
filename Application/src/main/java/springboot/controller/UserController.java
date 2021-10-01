@@ -1,6 +1,7 @@
 package springboot.controller;
 
 import springboot.domain.Organization;
+import springboot.domain.Supervisor_Subordinate;
 import springboot.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -70,22 +71,14 @@ public class UserController {
         return userUpdate;
     }
 
-    @PutMapping("/user/{userId}/add/subordinate/{subordinateId}")
-    public void addSubordinate(@PathVariable int userId, @PathVariable int subordinateId) {
-        Optional<User> optionalUser = userService.findById(userId);
-        User user = optionalUser.isPresent() ? optionalUser.get() : null;
-        Optional<User> optionalSubordinate = userService.findById(subordinateId);
-        User subordinate = optionalSubordinate.isPresent() ? optionalSubordinate.get() : null;
-        userService.addSubordinate(user.getId(), subordinate.getId());
+    @PutMapping("/subordinate/add")
+    public void addSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        userService.addSubordinate(supervisorSubordinate);
     }
 
-    @PutMapping("/user/{userId}/add/supervisor/{supervisorId}")
-    public void addSupervisor(@PathVariable int userId, @PathVariable int supervisorId) {
-        Optional<User> optionalUser = userService.findById(userId);
-        User user = optionalUser.isPresent() ? optionalUser.get() : null;
-        Optional<User> optionalSupervisor = userService.findById(supervisorId);
-        User subordinate = optionalSupervisor.isPresent() ? optionalSupervisor.get() : null;
-        userService.addSupervisor(user.getId(), subordinate.getId());
+    @PutMapping("/supervisor/add")
+    public void addSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        userService.addSupervisor(supervisorSubordinate);
     }
 
     @DeleteMapping("/user/{id}")
@@ -93,14 +86,14 @@ public class UserController {
         userService.deleteById(id);
     }
 
-    @DeleteMapping("/user/{userId}/remove/subordinate/{subordinateId}")
-    public void deleteSubordinate(@PathVariable int userId, @PathVariable int subordinateId) {
-        userService.deleteSubordinate(userId, subordinateId);
+    @DeleteMapping("/subordinate/remove")
+    public void deleteSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        userService.deleteSubordinate(supervisorSubordinate);
     }
 
-    @DeleteMapping("/user/{userId}/remove/supervisor/{supervisorId}")
-    public void deleteSupervisor(@PathVariable int userId, @PathVariable int supervisorId) {
-        userService.deleteSupervisor(userId, supervisorId);
+    @DeleteMapping("/supervisor/remove")
+    public void deleteSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        userService.deleteSupervisor(supervisorSubordinate);
     }
 
 
