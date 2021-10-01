@@ -2,6 +2,7 @@ package springboot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springboot.domain.Organization;
 import springboot.domain.User;
 import springboot.repository.Org_UserRepositoryInterface;
 import springboot.repository.UserRepositoryInterface;
@@ -40,5 +41,9 @@ public class UserService {
 
     public void deleteById(int id) {
         userRepository.deleteById(id);
+    }
+
+    public Optional<Organization> getOrganizationByUserId(int id){
+        return org_userRepository.getOrganizationByUserId(id);
     }
 }

@@ -1,5 +1,6 @@
 package springboot.controller;
 
+import springboot.domain.Organization;
 import springboot.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,14 @@ public class UserController {
         return optionalUser.isPresent() ? optionalUser.get() : null;
     }
 
+    @GetMapping("/user/{id}/organization")
+    public Organization getOrganization(@PathVariable int id){
+        Optional<User> optionalUser = userService.findById(id);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        Optional<Organization> optionalOrganization = userService.getOrganizationByUserId(user.getId());
+        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+    }
+
     @PutMapping("/user/{id}")
     public User update(@RequestBody User userUpdate) {
         Optional<User> optionalUser = userService.findById(userUpdate.getId());
@@ -48,5 +57,7 @@ public class UserController {
     public void delete(@PathVariable int id) {
         userService.deleteById(id);
     }
+
+
 }
 
