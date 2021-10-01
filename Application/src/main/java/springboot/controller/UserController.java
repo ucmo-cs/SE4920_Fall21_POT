@@ -1,57 +1,52 @@
 package springboot.controller;
 
-import springboot.domain.Car;
-import springboot.repository.CarDao;
+import springboot.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springboot.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("cars")
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
-    private CarDao carDao;
+    private UserService userService;
 
-    @PostMapping
-    public Car saveCar(@RequestBody Car car) {
-        Car newCar = new Car(car.getMake(), car.getModel(), car.getYear());
-        return carDao.save(newCar);
-    }
-
-    @GetMapping
-    public List<Car> listCars() {
-        List<Car> list = new ArrayList<>();
-        carDao.findAll().iterator().forEachRemaining(list::add);
+    @GetMapping("/user")
+    public List<User> listUsers() {
+        List<User> list = new ArrayList<>();
+        userService.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
 
-    @GetMapping("/{id}")
-    public Car getOne(@PathVariable int id) {
-        Optional<Car> optionalCar = carDao.findById(id);
-        return optionalCar.isPresent() ? optionalCar.get() : null;
+    @GetMapping("/user/{id}")
+    public User getOne(@PathVariable int id) {
+        Optional<User> optionalUser = userService.findById(id);
+        return optionalUser.isPresent() ? optionalUser.get() : null;
     }
 
-    @GetMapping("/make/{make}")
-    public List<Car> getMake(@PathVariable String make) {
-        return carDao.findByMake(make);
+    @GetMapping("/user/{username}")
+    public User getUser(@PathVariable String username) {
+        Optional<User> optionalUser = userService.findByUsername(username);
+        return optionalUser.isPresent() ? optionalUser.get() : null;
     }
 
-    @PutMapping("/{id}")
-    public Car update(@RequestBody Car carUpdate) {
-        Optional<Car> optionalCar = carDao.findById(carUpdate.getId());
-        if (optionalCar.isPresent()) {
-            carDao.save(carUpdate);
+    @PutMapping("/user/{id}")
+    public User update(@RequestBody User userUpdate) {
+        Optional<User> optionalUser = userService.findById(userUpdate.getId());
+        if (optionalUser.isPresent()) {
+            userService.save(userUpdate);
         }
-        return carUpdate;
+        return userUpdate;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/{id}")
     public void delete(@PathVariable int id) {
-        carDao.deleteById(id);
+        userService.deleteById(id);
     }
 }
 

@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
-    /*
 
+    /*
     Id : int unique identifier
     Email: varchar
     Username : varchar
@@ -14,7 +14,6 @@ public class User {
     Priority : integer
     Locked: boolean
     Online : boolean
-
      */
 
     @Id
