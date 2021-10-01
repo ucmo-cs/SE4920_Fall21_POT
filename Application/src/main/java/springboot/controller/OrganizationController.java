@@ -19,7 +19,8 @@ public class OrganizationController {
 
     @PostMapping
     public Organization saveOrganization(@RequestBody Organization organization){
-        return organizationService.save(organization);
+        Optional<Organization> optionalOrganization = organizationService.save(organization);
+        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
     }
 
     @GetMapping
@@ -37,7 +38,9 @@ public class OrganizationController {
 
     @GetMapping("/organization/{id}/users")
     public List<User> getUsers(@PathVariable int id) {
-        return organizationService.getAllUsersInOrganization(id);
+        List<User> users = new ArrayList<>();
+        organizationService.getAllUsersInOrganization(id).iterator().forEachRemaining(users::add);
+        return users;
     }
 
     @GetMapping("/organization/{orgName}")

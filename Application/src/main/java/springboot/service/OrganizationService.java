@@ -23,9 +23,8 @@ public class OrganizationService {
         this.org_userRepository = orgUserRepository;
     }
 
-    public Organization save(Organization organization) {
-        this.organizationRepository.save(organization);
-        return organization;
+    public Optional<Organization> save(Organization organization) {
+        return organizationRepository.save(organization);
     }
 
     public List<Organization> getAll(){
@@ -41,7 +40,7 @@ public class OrganizationService {
     }
 
     public Optional<Organization> deleteById(int id) {
-        return Optional.empty();
+        return organizationRepository.delete(id);
     }
 
     public List<User> getAllUsersInOrganization(int id){

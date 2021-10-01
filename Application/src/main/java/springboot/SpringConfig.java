@@ -42,5 +42,10 @@ public class SpringConfig {
         return new Org_UserRepository(em);
     }
 
+    @Bean
+    public Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository(){
+        return new Supervisor_SubordinateRepository(em);
+    }
+
 
 }

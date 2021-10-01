@@ -44,6 +44,23 @@ public class UserController {
         return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
     }
 
+    @GetMapping("/user/{id}/supervisor")
+    public User getSupervisor(@PathVariable int id){
+        Optional<User> optionalUser = userService.findById(id);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        Optional<User> optionalSupervisor = userService.getSupervisorOfId(user.getId());
+        return optionalSupervisor.isPresent() ? optionalSupervisor.get() : null;
+    }
+
+    @GetMapping("/user/{id}/subordinates")
+    public List<User> getSubordinates(@PathVariable int id){
+        Optional<User> optionalUser = userService.findById(id);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        List<User> subordinates = new ArrayList<>();
+        userService.getSubordinatesOfId(user.getId()).iterator().forEachRemaining(subordinates::add);
+        return subordinates;
+    }
+
     @PutMapping("/user/{id}")
     public User update(@RequestBody User userUpdate) {
         Optional<User> optionalUser = userService.findById(userUpdate.getId());
@@ -53,10 +70,40 @@ public class UserController {
         return userUpdate;
     }
 
+    @PutMapping("/user/{userId}/add/subordinate/{subordinateId}")
+    public void addSubordinate(@PathVariable int userId, @PathVariable int subordinateId) {
+        Optional<User> optionalUser = userService.findById(userId);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        Optional<User> optionalSubordinate = userService.findById(subordinateId);
+        User subordinate = optionalSubordinate.isPresent() ? optionalSubordinate.get() : null;
+        userService.addSubordinate(user.getId(), subordinate.getId());
+    }
+
+    @PutMapping("/user/{userId}/add/supervisor/{supervisorId}")
+    public void addSupervisor(@PathVariable int userId, @PathVariable int supervisorId) {
+        Optional<User> optionalUser = userService.findById(userId);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        Optional<User> optionalSupervisor = userService.findById(supervisorId);
+        User subordinate = optionalSupervisor.isPresent() ? optionalSupervisor.get() : null;
+        userService.addSupervisor(user.getId(), subordinate.getId());
+    }
+
     @DeleteMapping("/user/{id}")
     public void delete(@PathVariable int id) {
         userService.deleteById(id);
     }
+
+    @DeleteMapping("/user/{userId}/remove/subordinate/{subordinateId}")
+    public void deleteSubordinate(@PathVariable int userId, @PathVariable int subordinateId) {
+        userService.deleteSubordinate(userId, subordinateId);
+    }
+
+    @DeleteMapping("/user/{userId}/remove/supervisor/{supervisorId}")
+    public void deleteSupervisor(@PathVariable int userId, @PathVariable int supervisorId) {
+        userService.deleteSupervisor(userId, supervisorId);
+    }
+
+
 
 
 }

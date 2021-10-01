@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import springboot.domain.Organization;
 import springboot.domain.User;
 import springboot.repository.Org_UserRepositoryInterface;
+import springboot.repository.Supervisor_SubordinateRepositoryInterface;
 import springboot.repository.UserRepositoryInterface;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class UserService {
     private UserRepositoryInterface userRepository;
     @Autowired
     private Org_UserRepositoryInterface org_userRepository;
+    @Autowired
+    private Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository;
 
     public UserService(UserRepositoryInterface userRepository, Org_UserRepositoryInterface org_userRepository) {
         this.userRepository = userRepository;
@@ -45,5 +48,24 @@ public class UserService {
 
     public Optional<Organization> getOrganizationByUserId(int id){
         return org_userRepository.getOrganizationByUserId(id);
+    }
+
+    public Optional<User> getSupervisorOfId(int id){
+        return supervisor_subordinateRepository.getSupervisorOfId(id);
+    }
+    public List<User> getSubordinatesOfId(int id){
+        return supervisor_subordinateRepository.getSubordinatesOfId(id);
+    }
+    public Optional<User> addSupervisor(int userId, int supervisorId){
+        return supervisor_subordinateRepository.addSupervisor(userId, supervisorId);
+    }
+    public List<User> addSubordinate(int userId, int subordinateId){
+        return supervisor_subordinateRepository.addSubordinate(userId, subordinateId);
+    }
+    public Optional<User> deleteSupervisor(int userId, int supervisorId){
+        return supervisor_subordinateRepository.deleteSupervisor(userId, supervisorId);
+    }
+    public List<User> deleteSubordinate(int userId, int subordinateId){
+        return supervisor_subordinateRepository.deleteSubordinate(userId, subordinateId);
     }
 }
