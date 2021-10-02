@@ -22,9 +22,12 @@ public class UserService {
     @Autowired
     private Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository;
 
-    public UserService(UserRepositoryInterface userRepository, Org_UserRepositoryInterface org_userRepository) {
+    public UserService(UserRepositoryInterface userRepository,
+                       Org_UserRepositoryInterface org_userRepository,
+    Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository) {
         this.userRepository = userRepository;
         this.org_userRepository = org_userRepository;
+        this.supervisor_subordinateRepository = supervisor_subordinateRepository;
     }
 
     public Optional<User> save(User user) {

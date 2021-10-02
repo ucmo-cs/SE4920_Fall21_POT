@@ -30,6 +30,10 @@ public class Organization {
         this.description = description;
     }
 
+    public Organization() {
+
+    }
+
     public int getId() {
         return id;
     }

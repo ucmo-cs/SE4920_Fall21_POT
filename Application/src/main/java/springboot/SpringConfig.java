@@ -20,19 +20,20 @@ public class SpringConfig {
         this.em = em;
     }
 
-    @Bean
-    public UserService userService(){
-        return new UserService(userRepository(), org_userRepository());
-    }
+//    @Bean
+//    public UserService userService(){
+//        return new UserService(userRepository(), org_userRepository(), supervisor_subordinateRepository());
+//    }
+
     @Bean
     public UserRepositoryInterface userRepository(){
         return new UserRepository(em);
     }
 
-    @Bean
-    public OrganizationService organizationService(){
-        return new OrganizationService(organizationRepository(), org_userRepository());
-    }
+//    @Bean
+//    public OrganizationService organizationService(){
+//        return new OrganizationService(organizationRepository(), org_userRepository());
+//    }
     @Bean
     public OrganizationRepositoryInterface organizationRepository(){
         return new OrganizationRepository(em);
@@ -52,10 +53,11 @@ public class SpringConfig {
     public ScheduleRepositoryInterface scheduleRepository(){
         return new ScheduleRepository(em);
     }
-    @Bean
-    public ScheduleService scheduleService(){
-        return new ScheduleService(scheduleRepository());
-    }
+
+//    @Bean
+//    public ScheduleService scheduleService(){
+//        return new ScheduleService(scheduleRepository());
+//    }
 
 
 }
