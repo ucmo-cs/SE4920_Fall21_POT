@@ -17,14 +17,14 @@ class ContentBox extends Component{
 
   render(){
     return(
-        <div className="content-box">
-          {this.state.page === "login" &&
+      <div className="content-box">
+         {this.state.page === "login" && 
           <Login loginFunction={this.loginFunction} />
-          }
-          {this.state.page === "landing" &&
+         }
+         {this.state.page === "landing" &&
           <Landing/>
-          }
-        </div>
+         }
+      </div>
     )
   }
 }

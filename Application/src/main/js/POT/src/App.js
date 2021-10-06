@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 // import './App.css';
-import '../../resources/static/styling.css';
+import './styling.css';
 import Nav from './components/Nav';
 import ContentBox from './components/ContentBox';
 import placeholder from './placeholder.png'
