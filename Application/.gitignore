@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### JS Dependencies ###
+/node_modules
+/.pnp
+.pnp.js
