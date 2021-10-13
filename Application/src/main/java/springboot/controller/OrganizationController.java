@@ -37,6 +37,12 @@ public class OrganizationController {
         return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
     }
 
+    @GetMapping("/organization/owner/{id}")
+    public Organization getByOwner(@PathVariable int id){
+        Optional<Organization> optionalOrganization = organizationService.getOrganizationByOwnerId(id);
+        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+    }
+
     @GetMapping("/organization/{id}/users")
     public List<User> getUsers(@PathVariable int id) {
         List<User> users = new ArrayList<>();

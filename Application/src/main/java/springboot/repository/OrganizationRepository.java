@@ -28,7 +28,7 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
     }
 
     @Override
-    public List<Organization> getAllOrganizations() {
+    public List<Organization> getAll() {
         return null;
     }
 

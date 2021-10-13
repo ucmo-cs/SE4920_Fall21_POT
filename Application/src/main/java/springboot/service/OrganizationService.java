@@ -29,7 +29,7 @@ public class OrganizationService {
     }
 
     public List<Organization> getAll(){
-        return null;
+        return this.organizationRepository.getAll();
     }
 
     public Optional<Organization> findById(int id) {
@@ -57,6 +57,10 @@ public class OrganizationService {
 
     public Optional<User> deleteUserFromOrganization(Org_User orgUser) {
         return org_userRepository.deleteUserFromOrganization(orgUser);
+    }
+
+    public Optional<Organization> getOrganizationByOwnerId(int id){
+        return this.organizationRepository.getOrganizationByOwnerId(id);
     }
 
 

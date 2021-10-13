@@ -9,4 +9,5 @@ public class RepositoryGeneric {
     public RepositoryGeneric(EntityManager em) {
         this.em = em;
     }
+
 }

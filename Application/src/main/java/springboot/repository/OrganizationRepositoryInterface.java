@@ -11,7 +11,7 @@ public interface OrganizationRepositoryInterface {
     Optional<Organization> getOrganizationById(int id);
     Optional<Organization> getOrganizationByName(String name);
     Optional<Organization> getOrganizationByOwnerId(int id);
-    List<Organization> getAllOrganizations();
+    List<Organization> getAll();
     Optional<Organization> save(Organization organization);
     Optional<Organization> delete(int id);
 }
