@@ -1,6 +1,5 @@
 package springboot.repository;
 
-import org.springframework.stereotype.Repository;
 import springboot.domain.User;
 
 import javax.persistence.EntityManager;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class UserRepository extends RepositoryGeneric implements UserRepositoryInterface{
 
     public UserRepository(EntityManager em) {

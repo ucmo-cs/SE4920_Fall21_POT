@@ -1,10 +1,11 @@
 package springboot.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "org_user")
-public class Org_User {
+public class Org_User implements Serializable {
 
     /*
     Id : int unique identifier

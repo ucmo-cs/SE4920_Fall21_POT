@@ -11,6 +11,7 @@ function App() {
     <div className="parent">
       <div className="top-bar">
         <img src={placeholder}></img>
+          wkjefjwefbjkewbjwebf
         <HeaderNav/>
       </div> 
       <Nav/>

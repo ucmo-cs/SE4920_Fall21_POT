@@ -1,10 +1,11 @@
 package springboot.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "supervisor_subordinate")
-public class Supervisor_Subordinate {
+public class Supervisor_Subordinate implements Serializable {
 
     /*
     Id : int supervisor_id
