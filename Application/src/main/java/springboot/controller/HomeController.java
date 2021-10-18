@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
 
-    //Response Entity reepresents the whole HTTP response : status code, headers, and body
+    //Response Entity represents the whole HTTP response : status code, headers, and body
 
     @GetMapping(value = "/")
     public ResponseEntity<?> index() {
