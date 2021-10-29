@@ -1,0 +1,151 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 100vh;
+  background-color: #197bbd;
+}
+
+.top-bar {
+  grid-area: 1 / 1 / 4 / 21;
+}
+.nav-bar {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 2em;
+  font-style: oblique;
+  color: lightgray;
+  grid-area: 4 / 1 / 20 / 4;
+  padding-top: 1em;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: #125e8a;
+}
+
+.nav-bar li {
+  list-style-type: none;
+  padding-bottom: 0.5em;
+}
+.nav-bar li:hover {
+  text-decoration: underline;
+}
+
+.content-box {
+  grid-area: 5 / 5 / 19 / 18;
+  border: 4px solid #8a716a;
+  border-radius: 50px;
+  background-color: lightgray;
+}
+
+.header-nav {
+  float: right;
+}
+.nav1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-style: oblique;
+  color: lightgray;
+  padding-right: 2em;
+  padding-top: 1em;
+  font-size: 2em;
+  display: inline-block;
+}
+
+.nav1:hover {
+  text-decoration: underline;
+}
+.login {
+  /* background-color: pink; */
+  margin: auto;
+  width: 60%;
+  height: 40%;
+}
+.login-email {
+  /* background-color: purple; */
+  display: block;
+  margin: auto;
+  margin-top: 10em;
+  margin-bottom: 0.5em;
+  height: 20%;
+}
+.login-pass {
+  /* background-color: saddlebrown; */
+  display: block;
+  margin: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  height: 20%;
+}
+
+.login-email-label {
+  width: 30%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.login-email-input {
+  width: 65%;
+  height: 2em;
+  font-size: x-large;
+}
+
+.login-pass-label {
+  width: 30%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.login-pass-input {
+  width: 65%;
+  height: 2em;
+  font-size: x-large;
+}
+
+.login label {
+  font-size: xx-large;
+  display: inline-block;
+  margin: auto;
+}
+
+.login button {
+  display: block;
+  margin: auto;
+  height: 3em;
+  width: 20%;
+}
