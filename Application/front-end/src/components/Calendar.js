@@ -22,8 +22,9 @@ function Calendar(props) {
   }
 
   function changeText() {
-    alert("Do something.");
-    //this.setState({Text: "New State Achieved."});
+    var next_times = ""+"";
+    document.getElementById('1').innerHTML =(today.getHours()+1)+"<br/>";
+    document.getElementById('1').innerHTML +="Hello";
   }
 
   function onChange(nextValue) {
@@ -34,6 +35,19 @@ function Calendar(props) {
     changeText();
   }
 
+  function time_change(){
+    var time_hours = document.getElementById('time_hours').value;
+    var time_minutes = document.getElementById('time_minutes').value;
+    time_hours = parseInt(time_hours);
+    
+    if(time_hours+5>12){
+      document.getElementById('1').innerHTML = time_hours +":"+time_minutes+"AM";
+    }
+    else{
+      document.getElementById('1').innerHTML = time_hours +":"+time_minutes+"PM";
+    }
+    //alert("Arrived in hour_change");
+  }
 
 
   return (
@@ -50,7 +64,26 @@ function Calendar(props) {
         maxDate= {new Date(yyyy+'-'+farthest+'-'+dd)}
         onClickDay={onDay}
       />
-      <div id='1'>Sorta Working</div>
+      <br/>Meeting time: 
+      <select name="time_hours" id="time_hours" onChange={time_change}>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>:
+      <select name="time_minutes" id="time_minutes" onChange={time_change}>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+      <br/>
+      <div id='1'>8:00AM</div>
       </div>
       
     </div>
