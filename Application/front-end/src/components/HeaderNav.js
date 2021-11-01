@@ -15,10 +15,12 @@ function HeaderNav(props) {
     <Navbar bg="dark" variant="dark">
       <Container fluid>
       <Nav className="me-auto">
-        <Link to="/home" className="navbar-brand">Home</Link>
+        {//<Link to="/home" className="navbar-brand">Home</Link>
+        }
         <Link to="/login" className="navbar-brand">Login</Link>
         <Link to="/account" className="navbar-brand">Account</Link>
-        <Link to="/calendar" className="navbar-brand">Calendar</Link>
+        {//<Link to="/calendar" className="navbar-brand">Calendar</Link>
+        }
         
       </Nav>
       </Container>

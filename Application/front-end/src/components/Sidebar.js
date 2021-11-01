@@ -1,5 +1,7 @@
+import { Navbar } from 'react-bootstrap';
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
+import { Link } from 'react-router-dom';
 import './styling.css';
 
 function Sidebar(props) {
@@ -7,11 +9,13 @@ function Sidebar(props) {
     <div>
       <ProSidebar>
   <Menu iconShape="square">
-    <MenuItem icon={""}>Dashboard</MenuItem>
-    <SubMenu title="Components" icon={""}>
+    <MenuItem icon={""}><Link to="/home" className="navbar-brand">Home</Link></MenuItem>
+    <MenuItem icon={""}><Link to="/calendar" className="navbar-brand">Calendar</Link></MenuItem>
+    
+    {/*<SubMenu title="Components" icon={""}>
       <MenuItem>Component 1</MenuItem>
       <MenuItem>Component 2</MenuItem>
-    </SubMenu>
+  </SubMenu>*/}
   </Menu>
       </ProSidebar>
     </div>

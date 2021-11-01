@@ -16,8 +16,13 @@ function Calendar(props) {
   var yyyy = today.getFullYear();
   var farthest = mm+2;
 
+  if(farthest >12){
+    farthest-=12;
+    yyyy+=1;
+  }
+
   function changeText() {
-    alert("New Day");
+    alert("Do something.");
     //this.setState({Text: "New State Achieved."});
   }
 
@@ -33,7 +38,11 @@ function Calendar(props) {
 
   return (
     <div>
-      <div>
+      
+      <div className="left-child">
+      <Sidebar/>
+      </div>
+      <div className="right-child">
       <Cal
         onChange={onChange}
         value={value}
@@ -41,8 +50,8 @@ function Calendar(props) {
         maxDate= {new Date(yyyy+'-'+farthest+'-'+dd)}
         onClickDay={onDay}
       />
-      </div>
       <div id='1'>Sorta Working</div>
+      </div>
       
     </div>
   );
