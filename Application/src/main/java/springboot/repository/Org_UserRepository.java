@@ -21,7 +21,9 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
 
     @Override
     public List<User> getUsersByOrganization(Organization organization) {
-        return null;
+        List<User> users = em.createQuery("select u from User u", User.class)
+                .getResultList();
+        return users;
     }
 
     @Override

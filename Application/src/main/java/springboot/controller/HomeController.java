@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class HomeController {
 
 
     //Response Entity represents the whole HTTP response : status code, headers, and body
 
-    @GetMapping(value = "/")
-    public ResponseEntity<?> index() {
-        return new ResponseEntity<String>("Ok", HttpStatus.OK);
+    @RequestMapping("/")
+    public String index() {
+        return "index";
     }
 }
