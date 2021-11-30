@@ -34,6 +34,16 @@ public class Organization {
 
     }
 
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", owner_id='" + owner_id + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

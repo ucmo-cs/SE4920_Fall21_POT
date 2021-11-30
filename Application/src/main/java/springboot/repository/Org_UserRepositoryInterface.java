@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public interface Org_UserRepositoryInterface {
 
-    Optional<Organization> getOrganizationByUserId(int id);
-    List<User> getUsersByOrganization(Organization organization);
+    List<Organization> getOrganizationByUserId(int id);
+    List<User> getUsersByOrganizationId(int id);
     Optional<User> addUserToOrganization(Org_User orgUser);
     Optional<User> deleteUserFromOrganization(Org_User orgUser);
 

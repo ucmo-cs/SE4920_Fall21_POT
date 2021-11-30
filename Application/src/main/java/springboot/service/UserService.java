@@ -58,7 +58,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Organization> getOrganizationByUserId(int id){
+    public List<Organization> getOrganizationByUserId(int id){
         return org_userRepository.getOrganizationByUserId(id);
     }
 

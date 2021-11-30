@@ -47,7 +47,7 @@ public class OrganizationService {
     public List<User> getAllUsersInOrganization(int id){
         Optional<Organization> optionalOrganization = organizationRepository.getOrganizationById(id);
         Organization org = optionalOrganization.isPresent() ? optionalOrganization.get() : null;
-        List<User> users = this.org_userRepository.getUsersByOrganization(org);
+        List<User> users = this.org_userRepository.getUsersByOrganizationId(org.getId());
         return users;
     }
 

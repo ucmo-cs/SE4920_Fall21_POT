@@ -38,6 +38,17 @@ public class Schedule {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "id=" + id +
+                ", user_id='" + user_id + '\'' +
+                ", start_time='" + start_time + '\'' +
+                ", end_time='" + end_time + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

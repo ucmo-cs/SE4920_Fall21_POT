@@ -38,11 +38,11 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}/organization")
-    public Organization getOrganization(@PathVariable int id){
+    public List<Organization> getOrganization(@PathVariable int id){
         Optional<User> optionalUser = userService.findById(id);
         User user = optionalUser.isPresent() ? optionalUser.get() : null;
-        Optional<Organization> optionalOrganization = userService.getOrganizationByUserId(user.getId());
-        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+        List<Organization> org = userService.getOrganizationByUserId(user.getId());
+        return org;
     }
 
     @GetMapping("/user/{id}/supervisor")
@@ -71,12 +71,12 @@ public class UserController {
         return userUpdate;
     }
 
-    @PutMapping("/subordinate/add")
+    @PutMapping("/subordinate")
     public void addSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
         userService.addSubordinate(supervisorSubordinate);
     }
 
-    @PutMapping("/supervisor/add")
+    @PutMapping("/supervisor")
     public void addSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
         userService.addSupervisor(supervisorSubordinate);
     }
@@ -86,12 +86,12 @@ public class UserController {
         userService.deleteById(id);
     }
 
-    @DeleteMapping("/subordinate/remove")
+    @DeleteMapping("/subordinate")
     public void deleteSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
         userService.deleteSubordinate(supervisorSubordinate);
     }
 
-    @DeleteMapping("/supervisor/remove")
+    @DeleteMapping("/supervisor")
     public void deleteSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
         userService.deleteSupervisor(supervisorSubordinate);
     }

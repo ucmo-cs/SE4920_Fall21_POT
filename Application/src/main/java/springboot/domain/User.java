@@ -51,9 +51,9 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", make='" + email + '\'' +
-                ", model='" + username + '\'' +
-                ", year='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", priority='" + priority + '\'' +
                 ", locked='" + Utility.toBoolean(locked) + '\'' +
                 ", online='" + Utility.toBoolean(online) + '\'' +

@@ -32,7 +32,7 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
     @Override
     public List<Organization> getOrganizationByOwnerId(int id) {
         List<Organization> org = em.createQuery("select x from Organization x where x.owner_id = :owner_id", Organization.class)
-                .setParameter("owner_id", owner_id).getResultList();
+                .setParameter("owner_id", id).getResultList();
 
         return org;
     }
@@ -46,11 +46,18 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
 
     @Override
     public Optional<Organization> save(Organization organization) {
-        return Optional.empty();
+        em.persist(organization);
+        return Optional.of(organization);
     }
 
     @Override
     public Optional<Organization> delete(int id) {
-        return Optional.empty();
+        Optional<Organization> opt = Optional.of(em.createQuery("select x from Organization x where x.id = :id", Organization.class)
+                .setParameter("id", id).getSingleResult());
+        if(opt.isPresent()){
+            em.createQuery("delete from Organization x where x.id = :id", Organization.class)
+                    .setParameter("id", id);
+        }
+        return opt;
     }
 }

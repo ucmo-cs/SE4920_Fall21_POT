@@ -18,7 +18,7 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-    @PostMapping("/schedule/new")
+    @PostMapping("/schedule")
     public Schedule save(@RequestBody Schedule schedule){
         Optional<Schedule> optionalSchedule = scheduleService.save(schedule);
         return optionalSchedule.isPresent() ? optionalSchedule.get() : null;
@@ -37,7 +37,7 @@ public class ScheduleController {
         return list;
     }
 
-    @DeleteMapping("/schedule/delete/{id}")
+    @DeleteMapping("/schedule/{id}")
     public void delete(@PathVariable int id){
         scheduleService.deleteSchedule(id);
     }
