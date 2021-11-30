@@ -36,7 +36,7 @@ public class OrganizationService {
         return organizationRepository.getOrganizationById(id);
     }
 
-    public Optional<Organization> findByName(String name){
+    public List<Organization> findByName(String name){
         return organizationRepository.getOrganizationByName(name);
     }
 
@@ -59,7 +59,7 @@ public class OrganizationService {
         return org_userRepository.deleteUserFromOrganization(orgUser);
     }
 
-    public Optional<Organization> getOrganizationByOwnerId(int id){
+    public List<Organization> getOrganizationByOwnerId(int id){
         return this.organizationRepository.getOrganizationByOwnerId(id);
     }
 

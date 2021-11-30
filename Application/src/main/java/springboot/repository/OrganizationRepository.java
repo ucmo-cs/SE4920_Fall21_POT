@@ -1,6 +1,8 @@
 package springboot.repository;
 
 import springboot.domain.Organization;
+import springboot.domain.Schedule;
+import springboot.domain.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,22 +16,32 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
 
     @Override
     public Optional<Organization> getOrganizationById(int id) {
-        return Optional.empty();
+        Optional<Organization> opt = Optional.of(em.createQuery("select x from Organization x where x.id = :id", Organization.class)
+                .setParameter("id", id).getSingleResult());
+
+        return opt;
     }
 
     @Override
-    public Optional<Organization> getOrganizationByName(String name) {
-        return Optional.empty();
+    public List<Organization> getOrganizationByName(String name) {
+        List<Organization> org = em.createQuery("select x from Organization x where x.name = :name", Organization.class)
+                .setParameter("name", name).getResultList();
+        return org;
     }
 
     @Override
-    public Optional<Organization> getOrganizationByOwnerId(int id) {
-        return Optional.empty();
+    public List<Organization> getOrganizationByOwnerId(int id) {
+        List<Organization> org = em.createQuery("select x from Organization x where x.owner_id = :owner_id", Organization.class)
+                .setParameter("owner_id", owner_id).getResultList();
+
+        return org;
     }
 
     @Override
     public List<Organization> getAll() {
-        return null;
+        List<Organization> organizations = em.createQuery("select o from Organization o", Organization.class)
+                .getResultList();
+        return organizations;
     }
 
     @Override

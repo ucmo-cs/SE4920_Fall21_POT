@@ -38,9 +38,9 @@ public class OrganizationController {
     }
 
     @GetMapping("/organization/owner/{id}")
-    public Organization getByOwner(@PathVariable int id){
-        Optional<Organization> optionalOrganization = organizationService.getOrganizationByOwnerId(id);
-        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+    public List<Organization> getByOwner(@PathVariable int id){
+        List<Organization> org = organizationService.getOrganizationByOwnerId(id);
+        return org;
     }
 
     @GetMapping("/organization/{id}/users")
@@ -51,9 +51,9 @@ public class OrganizationController {
     }
 
     @GetMapping("/organization/{orgName}")
-    public Organization getName(@PathVariable String orgName){
-        Optional<Organization> optionalOrganization = organizationService.findByName(orgName);
-        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+    public List<Organization> getName(@PathVariable String orgName){
+        List<Organization> org = organizationService.findByName(orgName);
+        return org;
     }
 
     @PutMapping("/organization/{id}")

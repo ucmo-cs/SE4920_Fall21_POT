@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 public class RepositoryGeneric {
 
-    private final EntityManager em;
+    protected final EntityManager em;
 
     public RepositoryGeneric(EntityManager em) {
         this.em = em;

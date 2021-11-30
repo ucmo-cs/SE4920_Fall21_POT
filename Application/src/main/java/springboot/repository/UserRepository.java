@@ -30,14 +30,15 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public List<User> getAllUsers() {
-
-        List<User> allUsers = new ArrayList<User>();
-        return null;
+        List<User> users = em.createQuery("select u from User u", User.class)
+                .getResultList();
+        return users;
     }
 
     @Override
     public Optional<User> save(User user) {
-        return null;
+        em.persist(user);
+        return Optional.of(user);
     }
 
     @Override
