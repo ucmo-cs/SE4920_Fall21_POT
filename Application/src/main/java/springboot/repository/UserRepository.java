@@ -17,30 +17,36 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public Optional<User> getUserById(int id) {
-        Optional<User> opt = Optional.of(em.createQuery("select x from User x where x.id = :id", User.class)
-                .setParameter("id", id).getSingleResult());
-
+        Optional<User> opt = Optional.of(
+                em.createQuery("select x from User x where x.id = :id", User.class)
+                .setParameter("id", id)
+                .getSingleResult());
         return opt;
     }
 
     @Override
-    public Optional<User> getUserByUsername(String name) {
-        return null;
+    public Optional<User> getUserByUsername(String username) {
+        Optional<User> opt = Optional.of(
+                em.createQuery("select x from User x where x.username = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult());
+        return opt;
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        Optional<User> opt = Optional.of(em.createQuery("select x from User x where x.email = :email", User.class)
-                .setParameter("email", email).getSingleResult());
-
+        Optional<User> opt = Optional.of(
+                em.createQuery("select x from User x where x.email = :email", User.class)
+                .setParameter("email", email)
+                .getSingleResult());
         return opt;
     }
 
     @Override
     public List<User> getAllUsers() {
-        List<User> users = em.createQuery("select u from User u", User.class)
+        List<User> list = em.createQuery("select u from User u", User.class)
                 .getResultList();
-        return users;
+        return list;
     }
 
     @Override
@@ -50,7 +56,14 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
     }
 
     @Override
-    public void deleteById(int id) {
-
+    public Optional<User> deleteById(int user_id) {
+        Optional<User> opt = Optional.of(
+                em.createQuery("select x from User x where x.id = :user_id", User.class)
+                        .setParameter("user_id", user_id)
+                        .getSingleResult());
+        if(opt.isPresent()){
+            em.remove(opt.get());
+        }
+        return opt;
     }
 }

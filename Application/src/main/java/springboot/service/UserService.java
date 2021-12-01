@@ -25,9 +25,7 @@ public class UserService {
     @Autowired
     private Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository;
 
-    public UserService(UserRepositoryInterface userRepository,
-                       Org_UserRepositoryInterface org_userRepository,
-    Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository) {
+    public UserService(UserRepositoryInterface userRepository, Org_UserRepositoryInterface org_userRepository, Supervisor_SubordinateRepositoryInterface supervisor_subordinateRepository) {
         this.userRepository = userRepository;
         this.org_userRepository = org_userRepository;
         this.supervisor_subordinateRepository = supervisor_subordinateRepository;
@@ -58,17 +56,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<Organization> getOrganizationByUserId(int id){
         return org_userRepository.getOrganizationByUserId(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Optional<User> getSupervisorOfId(int id){
         return supervisor_subordinateRepository.getSupervisorOfId(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<User> getSubordinatesOfId(int id){
         return supervisor_subordinateRepository.getSubordinatesOfId(id);
     }
@@ -93,18 +91,14 @@ public class UserService {
         return supervisor_subordinateRepository.deleteSubordinate(supervisorSubordinate);
     }
 
+    @Transactional
     public boolean validateLogin(Credentials creds){
         Optional<User> opt = userRepository.getUserByEmail(creds.getEmail());
         System.out.println(opt.get().getPassword() + ": pass1  ___ pass2 :" + creds.getPassword());
         if(!opt.isPresent()){
             return false;
         }
-
-
         return opt.get().getPassword().equals(creds.getPassword());
     }
 
-//    public Optional<User> login(User emailAndPassword) {
-//        return
-//    }
 }
