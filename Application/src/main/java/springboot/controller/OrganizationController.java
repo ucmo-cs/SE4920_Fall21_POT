@@ -26,6 +26,7 @@ public class OrganizationController {
         //Optional<Organization> optionalOrganization = organizationService.save(organization);
         //ResponseEntity<> response = (data,status)
         //return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+        System.out.println("testing post");
 
         return new ResponseEntity<>(organizationService.save(organization), HttpStatus.CREATED);
     }
