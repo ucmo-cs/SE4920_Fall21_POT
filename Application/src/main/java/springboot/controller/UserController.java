@@ -21,31 +21,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/login")
-//    public boolean login(@RequestBody User userInfo){
-//    }
-
     @CrossOrigin
     @PostMapping("/login")
-    public boolean login(@RequestBody Credentials creds) {
-
-        System.out.println(creds.getEmail() + " : " + creds.getPassword());
-
-        //verify username and password
-        //return either a complete user or user with all nulls
-        ;
-
-        return userService.validateLogin(creds);
-//        User user = userService.login(creds);
-//        if(user != null){
-//            return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
-//        }
-//        else{
-//            return new ResponseEntity<>()
-//        }
-
-
-
+    public ResponseEntity<?> login(@RequestBody Credentials creds) {
+        boolean valid = userService.validateLogin(creds);
+        if(valid){
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
     @PostMapping("/user")
