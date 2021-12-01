@@ -3,6 +3,7 @@ package springboot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springboot.domain.Credentials;
 import springboot.domain.Organization;
 import springboot.domain.Supervisor_Subordinate;
 import springboot.domain.User;
@@ -91,4 +92,19 @@ public class UserService {
     public List<User> deleteSubordinate(Supervisor_Subordinate supervisorSubordinate){
         return supervisor_subordinateRepository.deleteSubordinate(supervisorSubordinate);
     }
+
+    public boolean validateLogin(Credentials creds){
+        Optional<User> opt = userRepository.getUserByEmail(creds.getEmail());
+        System.out.println(opt.get().getPassword() + ": pass1  ___ pass2 :" + creds.getPassword());
+        if(!opt.isPresent()){
+            return false;
+        }
+
+
+        return opt.get().getPassword().equals(creds.getPassword());
+    }
+
+//    public Optional<User> login(User emailAndPassword) {
+//        return
+//    }
 }

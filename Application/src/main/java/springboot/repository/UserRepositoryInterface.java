@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import springboot.domain.Credentials;
 import springboot.domain.User;
 
 import java.util.List;

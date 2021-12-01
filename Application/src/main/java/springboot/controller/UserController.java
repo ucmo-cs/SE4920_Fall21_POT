@@ -1,5 +1,8 @@
 package springboot.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import springboot.domain.Credentials;
 import springboot.domain.Organization;
 import springboot.domain.Supervisor_Subordinate;
 import springboot.domain.User;
@@ -22,13 +25,46 @@ public class UserController {
 //    public boolean login(@RequestBody User userInfo){
 //    }
 
+    @CrossOrigin
+    @PostMapping("/login")
+    public boolean login(@RequestBody Credentials creds) {
+
+        System.out.println(creds.getEmail() + " : " + creds.getPassword());
+
+        //verify username and password
+        //return either a complete user or user with all nulls
+        ;
+
+        return userService.validateLogin(creds);
+//        User user = userService.login(creds);
+//        if(user != null){
+//            return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+//        }
+//        else{
+//            return new ResponseEntity<>()
+//        }
+
+
+
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<?> saveUser(@RequestBody User user) {
+//        List<User> list = new ArrayList<>();
+//        userService.findAll().iterator().forEachRemaining(list::add);
+//        return list;
+        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
+    }
+
+
     @GetMapping("/user")
     public List<User> listUsers() {
-        System.out.println("test user");
         List<User> list = new ArrayList<>();
         userService.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
+
+
 
     @GetMapping("/user/{id}")
     public User getOne(@PathVariable int id) {

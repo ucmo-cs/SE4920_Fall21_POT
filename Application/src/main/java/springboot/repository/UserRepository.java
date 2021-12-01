@@ -1,6 +1,7 @@
 package springboot.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import springboot.domain.Organization;
 import springboot.domain.User;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,10 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public Optional<User> getUserById(int id) {
-        return null;
+        Optional<User> opt = Optional.of(em.createQuery("select x from User x where x.id = :id", User.class)
+                .setParameter("id", id).getSingleResult());
+
+        return opt;
     }
 
     @Override
@@ -26,7 +30,10 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return null;
+        Optional<User> opt = Optional.of(em.createQuery("select x from User x where x.email = :email", User.class)
+                .setParameter("email", email).getSingleResult());
+
+        return opt;
     }
 
     @Override
