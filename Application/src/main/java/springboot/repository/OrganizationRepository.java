@@ -1,8 +1,6 @@
 package springboot.repository;
 
 import springboot.domain.Organization;
-import springboot.domain.Schedule;
-import springboot.domain.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -16,32 +14,37 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
 
     @Override
     public Optional<Organization> getOrganizationById(int id) {
-        Optional<Organization> opt = Optional.of(em.createQuery("select x from Organization x where x.id = :id", Organization.class)
-                .setParameter("id", id).getSingleResult());
-
+        Optional<Organization> opt = Optional.of(
+                em.createQuery("select x from Organization x where x.id = :id", Organization.class)
+                .setParameter("id", id)
+                .getSingleResult());
         return opt;
     }
 
     @Override
     public List<Organization> getOrganizationByName(String name) {
-        List<Organization> org = em.createQuery("select x from Organization x where x.name = :name", Organization.class)
-                .setParameter("name", name).getResultList();
-        return org;
+        List<Organization> list =
+                em.createQuery("select x from Organization x where x.name = :name", Organization.class)
+                .setParameter("name", name)
+                .getResultList();
+        return list;
     }
 
     @Override
-    public List<Organization> getOrganizationByOwnerId(int id) {
-        List<Organization> org = em.createQuery("select x from Organization x where x.owner_id = :owner_id", Organization.class)
-                .setParameter("owner_id", id).getResultList();
-
-        return org;
+    public List<Organization> getOrganizationByOwnerId(int owner_id) {
+        List<Organization> list =
+                em.createQuery("select x from Organization x where x.owner_id = :owner_id", Organization.class)
+                .setParameter("owner_id", owner_id)
+                .getResultList();
+        return list;
     }
 
     @Override
     public List<Organization> getAll() {
-        List<Organization> organizations = em.createQuery("select o from Organization o", Organization.class)
+        List<Organization> list =
+                em.createQuery("select o from Organization o", Organization.class)
                 .getResultList();
-        return organizations;
+        return list;
     }
 
     @Override
@@ -52,11 +55,12 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
 
     @Override
     public Optional<Organization> delete(int id) {
-        Optional<Organization> opt = Optional.of(em.createQuery("select x from Organization x where x.id = :id", Organization.class)
-                .setParameter("id", id).getSingleResult());
+        Optional<Organization> opt = Optional.of(
+                em.createQuery("select x from Organization x where x.id = :id", Organization.class)
+                .setParameter("id", id)
+                .getSingleResult());
         if(opt.isPresent()){
-            em.createQuery("delete from Organization x where x.id = :id", Organization.class)
-                    .setParameter("id", id);
+            em.remove(opt.get());
         }
         return opt;
     }

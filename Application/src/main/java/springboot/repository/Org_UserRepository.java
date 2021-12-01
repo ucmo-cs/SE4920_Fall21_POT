@@ -21,7 +21,8 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
     @Override
     public List<Organization> getOrganizationByUserId(int id) {
         List<Org_User> a = em.createQuery("select x from Org_User x where x.user_id = :user_id", Org_User.class)
-                .setParameter("user_id", id).getResultList();
+                .setParameter("user_id", id)
+                .getResultList();
         List<Organization> b = null;
         for(int x = 0; x<a.size(); x++){
             Org_User c = a.get(x);
@@ -36,7 +37,8 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
     @Override
     public List<User> getUsersByOrganizationId(int id) {
         List<Org_User> a = em.createQuery("select x from Org_User x where x.org_id = :org_id", Org_User.class)
-                .setParameter("org_id", id).getResultList();
+                .setParameter("org_id", id)
+                .getResultList();
         List<User> b = null;
         for(int x = 0; x<a.size(); x++){
             Org_User c = a.get(x);
@@ -56,12 +58,14 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
 
     @Override
     public Optional<User> deleteUserFromOrganization(Org_User orgUser) {
-//        Optional<Org_User> opt = Optional.of(em.createQuery("select x from Org_User x where x.org_id = :org_id", Org_User.class)
-//                .setParameter("id", id).getSingleResult());
-//        if(opt.isPresent()){
-//            em.createQuery("delete from Organization x where x.id = :id", Organization.class)
-//                    .setParameter("id", id);
-//        }
+        Optional<Org_User> opt = Optional.of(em.createQuery("select x from Org_User x where x.org_id = :org_id and x.user_id = :user_id", Org_User.class)
+                .setParameter("org_id", orgUser.getOrgId())
+                .setParameter("user_id", orgUser.getUserId())
+                .getSingleResult());
+        if(opt.isPresent()){
+            em.remove(opt.get());
+            return userRepository.getUserById(opt.get().getUserId());
+        }
         return null;
     }
 }

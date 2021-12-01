@@ -8,7 +8,7 @@ import springboot.domain.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface Org_UserRepositoryInterface {
+public interface Org_UserRepositoryInterface{
 
     List<Organization> getOrganizationByUserId(int id);
     List<User> getUsersByOrganizationId(int id);
