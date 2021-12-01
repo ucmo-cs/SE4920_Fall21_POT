@@ -40,8 +40,8 @@ public class OrganizationService {
         return organizationRepository.getOrganizationByName(name);
     }
 
-    public Optional<Organization> deleteById(int id) {
-        return organizationRepository.delete(id);
+    public void deleteById(int id) {
+        organizationRepository.delete(id);
     }
 
     public List<User> getAllUsersInOrganization(int id){

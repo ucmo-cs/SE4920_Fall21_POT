@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import org.springframework.data.repository.CrudRepository;
 import springboot.domain.User;
 
 import javax.persistence.EntityManager;

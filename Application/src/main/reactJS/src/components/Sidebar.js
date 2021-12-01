@@ -11,6 +11,7 @@ function Sidebar(props) {
   <Menu iconShape="square">
     <MenuItem icon={""}><Link to="/home" className="navbar-brand">Home</Link></MenuItem>
     <MenuItem icon={""}><Link to="/calendar" className="navbar-brand">Calendar</Link></MenuItem>
+    <MenuItem icon={""}><Link to="/organization" className="navbar-brand">Organization</Link></MenuItem>
     
     {/*<SubMenu title="Components" icon={""}>
       <MenuItem>Component 1</MenuItem>

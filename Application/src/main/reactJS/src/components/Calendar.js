@@ -7,62 +7,70 @@ import 'react-calendar/dist/Calendar.css';
 function Calendar(props) {
 
   const [value, setValue] = useState(new Date());
-  //this.state = { Text:"This is a test.!"}
-  //this.componentRef = React.createRef();
 
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1;
   var yyyy = today.getFullYear();
   var farthest = mm+2;
+  var far_yyyy = yyyy;
+  var clicked_day;
+  var clicked_month;
+  var clicked_year;
+  var time_hours;
+  var time_minutes;
 
   if(farthest >12){
     farthest-=12;
-    yyyy+=1;
-  }
-
-  function changeText() {
-    var next_times = ""+"";
-    document.getElementById('1').innerHTML =(today.getHours()+1)+"<br/>";
-    document.getElementById('1').innerHTML +="Hello";
+    far_yyyy+=1;
   }
 
   function onChange(nextValue) {
     //setValue(nextValue);
   }
 
-  function onDay(){
-    changeText();
+  function onDay(value){
+    //var clicked_date = onClickDay.getDate();
+    clicked_day = value.getDate();
+    clicked_month = value.getMonth()+1;
+    clicked_year = value.getFullYear();
+
+    document.getElementById('clicked_date').innerHTML = clicked_month+"/"+clicked_day +"/"+ clicked_year;
+    //document.getElementById('1').innerHTML +="Hello";
   }
 
   function time_change(){
-    var time_hours = document.getElementById('time_hours').value;
-    var time_minutes = document.getElementById('time_minutes').value;
+    time_hours = document.getElementById('time_hours').value;
+    time_minutes = document.getElementById('time_minutes').value;
     time_hours = parseInt(time_hours);
     
-    if(time_hours+5>12){
-      document.getElementById('1').innerHTML = time_hours +":"+time_minutes+"AM";
+    if(time_hours+5>12 && time_hours!=12){
+      document.getElementById('clicked_time').innerHTML = time_hours +":"+time_minutes+"AM";
     }
     else{
-      document.getElementById('1').innerHTML = time_hours +":"+time_minutes+"PM";
+      document.getElementById('clicked_time').innerHTML = time_hours +":"+time_minutes+"PM";
     }
     //alert("Arrived in hour_change");
   }
 
+  function create_meeting(){
+    alert("Created meeting at the following time: " + document.getElementById('clicked_date').innerHTML+" at " 
+    +document.getElementById('clicked_time').innerHTML );
+  }
 
   return (
+    
     <div>
-      
       <div className="left-child">
       <Sidebar/>
       </div>
       <div className="right-child">
       <Cal
-        onChange={onChange}
+        //onChange={onChange}
         value={value}
         minDate= {today}
-        maxDate= {new Date(yyyy+'-'+farthest+'-'+dd)}
-        onClickDay={onDay}
+        maxDate= {new Date(far_yyyy+'-'+farthest+'-'+dd)}
+        onClickDay={value,onDay}
       />
       <br/>Meeting time: 
       <select name="time_hours" id="time_hours" onChange={time_change}>
@@ -83,7 +91,9 @@ function Calendar(props) {
         <option value="45">45</option>
       </select>
       <br/>
-      <div id='1'>8:00AM</div>
+      <div id='clicked_date'>{mm+"/"+dd +"/"+ yyyy}</div>
+      <div id='clicked_time'>8:00AM</div>
+      <button type="submit" onClick={create_meeting}>Create Meeting</button>
       </div>
       
     </div>

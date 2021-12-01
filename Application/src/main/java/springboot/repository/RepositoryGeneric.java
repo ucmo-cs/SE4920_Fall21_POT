@@ -2,7 +2,7 @@ package springboot.repository;
 
 import javax.persistence.EntityManager;
 
-public class RepositoryGeneric {
+public class RepositoryGeneric{
 
     protected final EntityManager em;
 

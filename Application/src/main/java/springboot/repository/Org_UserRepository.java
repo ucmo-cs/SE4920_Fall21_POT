@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import org.springframework.data.repository.CrudRepository;
 import springboot.domain.Org_User;
 import springboot.domain.Organization;
 import springboot.domain.User;

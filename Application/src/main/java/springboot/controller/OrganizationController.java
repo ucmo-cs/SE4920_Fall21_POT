@@ -20,6 +20,7 @@ public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
+    @CrossOrigin
     @PostMapping("/organization")
     public ResponseEntity<?> saveOrganization(@RequestBody Organization organization){
         //Optional<Organization> optionalOrganization = organizationService.save(organization);
@@ -34,23 +35,25 @@ public class OrganizationController {
     public ResponseEntity<?> listAll(){
 //        List<Organization> list = new ArrayList<>();
 //        organizationService.getAll().iterator().forEachRemaining(list::add);
-        System.out.println("called /organization");
 
         return new ResponseEntity<>(organizationService.getAll(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/organization/{id}")
     public Organization getOne(@PathVariable int id){
         Optional<Organization> optionalOrganization = organizationService.findById(id);
         return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
     }
 
+    @CrossOrigin
     @GetMapping("/organization/owner/{id}")
     public List<Organization> getByOwner(@PathVariable int id){
         List<Organization> org = organizationService.getOrganizationByOwnerId(id);
         return org;
     }
 
+    @CrossOrigin
     @GetMapping("/organization/{id}/users")
     public List<User> getUsers(@PathVariable int id) {
         List<User> users = new ArrayList<>();
@@ -58,12 +61,14 @@ public class OrganizationController {
         return users;
     }
 
+    @CrossOrigin
     @GetMapping("/organization/{orgName}")
     public List<Organization> getName(@PathVariable String orgName){
         List<Organization> org = organizationService.findByName(orgName);
         return org;
     }
 
+    @CrossOrigin
     @PostMapping("/organization/{id}")
     public Organization update(@RequestBody Organization orgUpdate) {
         Optional<Organization> optionalOrganization = organizationService.findById(orgUpdate.getId());
@@ -73,16 +78,19 @@ public class OrganizationController {
         return orgUpdate;
     }
 
+    @CrossOrigin
     @PostMapping("/organization/user")
     public void addUserToOrganization(@RequestBody Org_User orgUser) {
         organizationService.addUserToOrganization(orgUser);
     }
 
+    @CrossOrigin
     @DeleteMapping("/organization/{id}")
     public void delete(@PathVariable int id) {
         organizationService.deleteById(id);
     }
 
+    @CrossOrigin
     @DeleteMapping("/organization/user")
     public void removeUserFromOrganization(@RequestBody Org_User orgUser) {
         organizationService.deleteUserFromOrganization(orgUser);
