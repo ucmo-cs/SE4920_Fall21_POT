@@ -55,12 +55,12 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
 
     @Override
     public Optional<User> deleteUserFromOrganization(Org_User orgUser) {
-        Optional<Org_User> opt = Optional.of(em.createQuery("select x from Org_User x where x.org_id = :org_id", Org_User.class)
-                .setParameter("id", id).getSingleResult());
-        if(opt.isPresent()){
-            em.createQuery("delete from Organization x where x.id = :id", Organization.class)
-                    .setParameter("id", id);
-        }
-        return opt;
+//        Optional<Org_User> opt = Optional.of(em.createQuery("select x from Org_User x where x.org_id = :org_id", Org_User.class)
+//                .setParameter("id", id).getSingleResult());
+//        if(opt.isPresent()){
+//            em.createQuery("delete from Organization x where x.id = :id", Organization.class)
+//                    .setParameter("id", id);
+//        }
+        return null;
     }
 }

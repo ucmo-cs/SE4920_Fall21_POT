@@ -1,6 +1,8 @@
 package springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springboot.domain.Org_User;
 import springboot.domain.Organization;
@@ -12,23 +14,29 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("organization")
+//@RequestMapping("organization")
 public class OrganizationController {
 
     @Autowired
     private OrganizationService organizationService;
 
     @PostMapping("/organization")
-    public Organization saveOrganization(@RequestBody Organization organization){
-        Optional<Organization> optionalOrganization = organizationService.save(organization);
-        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+    public ResponseEntity<?> saveOrganization(@RequestBody Organization organization){
+        //Optional<Organization> optionalOrganization = organizationService.save(organization);
+        //ResponseEntity<> response = (data,status)
+        //return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+
+        return new ResponseEntity<>(organizationService.save(organization), HttpStatus.CREATED);
     }
 
+    @CrossOrigin
     @GetMapping("/organization")
-    public List<Organization> listAll(){
-        List<Organization> list = new ArrayList<>();
-        organizationService.getAll().iterator().forEachRemaining(list::add);
-        return list;
+    public ResponseEntity<?> listAll(){
+//        List<Organization> list = new ArrayList<>();
+//        organizationService.getAll().iterator().forEachRemaining(list::add);
+        System.out.println("called /organization");
+
+        return new ResponseEntity<>(organizationService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/organization/{id}")
@@ -56,7 +64,7 @@ public class OrganizationController {
         return org;
     }
 
-    @PutMapping("/organization/{id}")
+    @PostMapping("/organization/{id}")
     public Organization update(@RequestBody Organization orgUpdate) {
         Optional<Organization> optionalOrganization = organizationService.findById(orgUpdate.getId());
         if (optionalOrganization.isPresent()) {
@@ -65,7 +73,7 @@ public class OrganizationController {
         return orgUpdate;
     }
 
-    @PutMapping("/organization/user")
+    @PostMapping("/organization/user")
     public void addUserToOrganization(@RequestBody Org_User orgUser) {
         organizationService.addUserToOrganization(orgUser);
     }

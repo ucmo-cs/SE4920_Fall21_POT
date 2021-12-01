@@ -12,14 +12,23 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("schedule")
+//@RequestMapping("schedule")
 public class ScheduleController {
 
     @Autowired
     private ScheduleService scheduleService;
 
+
+    @GetMapping("/schedule")
+    public List<Schedule> getAll(){
+        System.out.println("Schedule test, GET");
+        //not a usable function.
+        return null;
+    }
+
     @PostMapping("/schedule")
     public Schedule save(@RequestBody Schedule schedule){
+        System.out.println("Schedule test");
         Optional<Schedule> optionalSchedule = scheduleService.save(schedule);
         return optionalSchedule.isPresent() ? optionalSchedule.get() : null;
     }

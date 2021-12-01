@@ -12,14 +12,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("user")
+//@RequestMapping("user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+//    @GetMapping("/login")
+//    public boolean login(@RequestBody User userInfo){
+//    }
+
     @GetMapping("/user")
     public List<User> listUsers() {
+        System.out.println("test user");
         List<User> list = new ArrayList<>();
         userService.findAll().iterator().forEachRemaining(list::add);
         return list;
@@ -62,7 +67,7 @@ public class UserController {
         return subordinates;
     }
 
-    @PutMapping("/user/{id}")
+    @PostMapping("/user/{id}")
     public User update(@RequestBody User userUpdate) {
         Optional<User> optionalUser = userService.findById(userUpdate.getId());
         if (optionalUser.isPresent()) {
@@ -71,7 +76,7 @@ public class UserController {
         return userUpdate;
     }
 
-    @PutMapping("/subordinate")
+    @PostMapping("/subordinate")
     public void addSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
         userService.addSubordinate(supervisorSubordinate);
     }

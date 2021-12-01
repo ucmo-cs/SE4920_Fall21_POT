@@ -13,8 +13,4 @@ public class HomeController {
 
     //Response Entity represents the whole HTTP response : status code, headers, and body
 
-    @RequestMapping("/")
-    public String index() {
-        return "index";
-    }
 }
