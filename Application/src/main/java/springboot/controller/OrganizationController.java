@@ -23,70 +23,102 @@ public class OrganizationController {
     @CrossOrigin
     @PostMapping("/organization")
     public ResponseEntity<?> saveOrganization(@RequestBody Organization organization){
-        return new ResponseEntity<>(organizationService.save(organization), HttpStatus.CREATED);
+        Optional<Organization> opt = organizationService.save(organization);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.CREATED);
     }
 
     @CrossOrigin
     @GetMapping("/organization")
     public ResponseEntity<?> listAll(){
-        return new ResponseEntity<>(organizationService.getAll(), HttpStatus.OK);
+        List<Organization> list = organizationService.getAll();
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("/organization/{id}")
-    public Organization getOne(@PathVariable int id){
-        Optional<Organization> optionalOrganization = organizationService.findById(id);
-        return optionalOrganization.isPresent() ? optionalOrganization.get() : null;
+    public ResponseEntity<?> getOne(@PathVariable int id){
+        Optional<Organization> opt = organizationService.findById(id);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("/organization/owner/{id}")
-    public List<Organization> getByOwner(@PathVariable int id){
-        List<Organization> org = organizationService.getOrganizationByOwnerId(id);
-        return org;
-    }
-
-    @CrossOrigin
-    @GetMapping("/organization/{id}/users")
-    public List<User> getUsers(@PathVariable int id) {
-        List<User> users = new ArrayList<>();
-        organizationService.getAllUsersInOrganization(id).iterator().forEachRemaining(users::add);
-        return users;
+    public ResponseEntity<?> getByOwner(@PathVariable int id){
+        List<Organization> list = organizationService.getOrganizationByOwnerId(id);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("/organization/{orgName}")
-    public List<Organization> getName(@PathVariable String orgName){
-        List<Organization> org = organizationService.findByName(orgName);
-        return org;
-    }
-
-    @CrossOrigin
-    @PostMapping("/organization/{id}")
-    public Organization update(@RequestBody Organization orgUpdate) {
-        Optional<Organization> optionalOrganization = organizationService.findById(orgUpdate.getId());
-        if (optionalOrganization.isPresent()) {
-            organizationService.save(orgUpdate);
+    public ResponseEntity<?> getByName(@PathVariable String orgName){
+        List<Organization> list = organizationService.findByName(orgName);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
         }
-        return orgUpdate;
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @CrossOrigin
-    @PostMapping("/organization/user")
-    public void addUserToOrganization(@RequestBody Org_User orgUser) {
-        organizationService.addUserToOrganization(orgUser);
+    @GetMapping("/organization/{id}/users")
+    public ResponseEntity<?> getUsers(@PathVariable int id) {
+        List<User> list = organizationService.getAllUsersInOrganization(id);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PatchMapping("/organization/{id}")
+    public ResponseEntity<?> update(@RequestBody Organization orgUpdate) {
+        Optional<Organization> opt = organizationService.updateOrganization(orgUpdate);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
+
     }
 
     @CrossOrigin
     @DeleteMapping("/organization/{id}")
-    public void delete(@PathVariable int id) {
-        organizationService.deleteById(id);
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        Optional<Organization> opt = organizationService.deleteById(id);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
+    }
+
+    @CrossOrigin
+    @PostMapping("/organization/user")
+    public ResponseEntity<?> addUserToOrganization(@RequestBody Org_User orgUser) {
+        Optional<User> opt = organizationService.addUserToOrganization(orgUser);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
     }
 
     @CrossOrigin
     @DeleteMapping("/organization/user")
-    public void removeUserFromOrganization(@RequestBody Org_User orgUser) {
-        organizationService.deleteUserFromOrganization(orgUser);
+    public ResponseEntity<?> removeUserFromOrganization(@RequestBody Org_User orgUser) {
+        Optional<User> opt = organizationService.deleteUserFromOrganization(orgUser);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
     }
 
 }

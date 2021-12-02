@@ -1,6 +1,8 @@
 package springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springboot.domain.Organization;
 import springboot.domain.Schedule;
@@ -18,36 +20,65 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-
+    @CrossOrigin
     @GetMapping("/schedule")
-    public List<Schedule> getAll(){
-        System.out.println("Schedule test, GET");
-        //not a usable function.
-        return null;
+    public ResponseEntity<?> getAll(){
+        List<Schedule> list = scheduleService.getAll();
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping("/schedule")
-    public Schedule save(@RequestBody Schedule schedule){
-        System.out.println("Schedule test");
-        Optional<Schedule> optionalSchedule = scheduleService.save(schedule);
-        return optionalSchedule.isPresent() ? optionalSchedule.get() : null;
+    public ResponseEntity<?> save(@RequestBody Schedule schedule){
+        Optional<Schedule> opt = scheduleService.save(schedule);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.CREATED);
     }
 
+    @CrossOrigin
     @GetMapping("/schedule/{id}")
-    public Schedule get(@PathVariable int id){
-        Optional<Schedule> optionalSchedule = scheduleService.getScheduleById(id);
-        return optionalSchedule.isPresent() ? optionalSchedule.get() : null;
+    public ResponseEntity<?> get(@PathVariable int id){
+        Optional<Schedule> opt = scheduleService.getScheduleById(id);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/schedule/user/{userId}")
-    public List<Schedule> getSchedules(@PathVariable int userId){
-        List<Schedule> list = new ArrayList<>();
-        scheduleService.getSchedulesByUserId(userId).iterator().forEachRemaining(list::add);
-        return list;
+    public ResponseEntity<?> getSchedules(@PathVariable int userId){
+        List<Schedule> list = scheduleService.getSchedulesByUserId(userId);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @DeleteMapping("/schedule/{id}")
-    public void delete(@PathVariable int id){
-        scheduleService.deleteSchedule(id);
+    @CrossOrigin
+    @PatchMapping("/schedule/{id}")
+    public ResponseEntity<?> update(@RequestBody Schedule schedule){
+        Optional<Schedule> opt = scheduleService.updateSchedule(schedule);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
     }
+
+    @CrossOrigin
+    @DeleteMapping("/schedule/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id){
+        Optional<Schedule> opt = scheduleService.deleteSchedule(id);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
+    }
+
+
 }

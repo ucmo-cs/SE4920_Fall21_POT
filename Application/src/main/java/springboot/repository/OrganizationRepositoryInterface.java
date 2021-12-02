@@ -15,4 +15,5 @@ public interface OrganizationRepositoryInterface{
     List<Organization> getAll();
     Optional<Organization> save(Organization organization);
     Optional<Organization> delete(int id);
+    Optional<Organization> update(Organization org);
 }

@@ -17,19 +17,21 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public Optional<User> getUserById(int id) {
-        Optional<User> opt = Optional.of(
+        Optional<User> opt =
                 em.createQuery("select x from User x where x.id = :id", User.class)
                 .setParameter("id", id)
-                .getSingleResult());
+                .getResultStream()
+                .findFirst();
         return opt;
     }
 
     @Override
     public Optional<User> getUserByUsername(String username) {
-        Optional<User> opt = Optional.of(
+        Optional<User> opt =
                 em.createQuery("select x from User x where x.username = :username", User.class)
                 .setParameter("username", username)
-                .getSingleResult());
+                .getResultStream()
+                .findFirst();
         return opt;
     }
 
@@ -58,10 +60,11 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public Optional<User> deleteById(int user_id) {
-        Optional<User> opt = Optional.of(
+        Optional<User> opt =
                 em.createQuery("select x from User x where x.id = :user_id", User.class)
                         .setParameter("user_id", user_id)
-                        .getSingleResult());
+                        .getResultStream()
+                        .findFirst();
         if(opt.isPresent()){
             em.remove(opt.get());
         }

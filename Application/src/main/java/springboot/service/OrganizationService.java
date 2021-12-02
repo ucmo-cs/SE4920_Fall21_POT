@@ -46,8 +46,8 @@ public class OrganizationService {
     }
 
     @Transactional
-    public void deleteById(int id) {
-        organizationRepository.delete(id);
+    public Optional<Organization> deleteById(int id) {
+        return organizationRepository.delete(id);
     }
 
     @Transactional
@@ -71,6 +71,11 @@ public class OrganizationService {
     @Transactional
     public List<Organization> getOrganizationByOwnerId(int id){
         return this.organizationRepository.getOrganizationByOwnerId(id);
+    }
+
+    @Transactional
+    public Optional<Organization> updateOrganization(Organization org){
+        return this.organizationRepository.update(org);
     }
 
 

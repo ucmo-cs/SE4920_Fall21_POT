@@ -19,6 +19,12 @@ public class ScheduleService {
     public ScheduleService(ScheduleRepositoryInterface scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
     }
+
+    @Transactional
+    public List<Schedule> getAll(){
+        return scheduleRepository.getAll();
+    }
+
     @Transactional
     public Optional<Schedule> save(Schedule schedule) {
         return scheduleRepository.addSchedule(schedule);
@@ -37,5 +43,10 @@ public class ScheduleService {
     @Transactional
     public Optional<Schedule> deleteSchedule(int id){
         return scheduleRepository.deleteSchedule(id);
+    }
+
+    @Transactional
+    public Optional<Schedule> updateSchedule(Schedule schedule){
+        return scheduleRepository.update(schedule);
     }
 }

@@ -14,10 +14,11 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
 
     @Override
     public Optional<Organization> getOrganizationById(int id) {
-        Optional<Organization> opt = Optional.of(
+        Optional<Organization> opt =
                 em.createQuery("select x from Organization x where x.id = :id", Organization.class)
                 .setParameter("id", id)
-                .getSingleResult());
+                .getResultStream()
+                .findFirst();
         return opt;
     }
 
@@ -55,13 +56,29 @@ public class OrganizationRepository extends RepositoryGeneric implements Organiz
 
     @Override
     public Optional<Organization> delete(int id) {
-        Optional<Organization> opt = Optional.of(
+        Optional<Organization> opt =
                 em.createQuery("select x from Organization x where x.id = :id", Organization.class)
                 .setParameter("id", id)
-                .getSingleResult());
+                .getResultStream()
+                .findFirst();
         if(opt.isPresent()){
             em.remove(opt.get());
         }
         return opt;
     }
+
+    @Override
+    public Optional<Organization> update(Organization org) {
+        Optional<Organization> opt =
+                em.createQuery("select x from Organization x where x.id = :id", Organization.class)
+                .setParameter("id", org.getId())
+                .getResultStream()
+                .findFirst();
+        if(opt.isPresent()){
+            em.persist(org);
+        }
+        return opt;
+    }
+
+
 }

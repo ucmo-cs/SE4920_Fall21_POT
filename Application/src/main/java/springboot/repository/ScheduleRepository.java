@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import springboot.domain.Organization;
 import springboot.domain.Schedule;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,13 @@ public class ScheduleRepository extends RepositoryGeneric implements ScheduleRep
 
     public ScheduleRepository(EntityManager em) {
         super(em);
+    }
+
+    @Override
+    public List<Schedule> getAll(){
+        List<Schedule> list = em.createQuery("select x from Schedule x", Schedule.class)
+                .getResultList();
+        return list;
     }
 
     @Override
@@ -43,6 +51,19 @@ public class ScheduleRepository extends RepositoryGeneric implements ScheduleRep
                 .getSingleResult());
         if(opt.isPresent()){
             em.remove(opt.get());
+        }
+        return opt;
+    }
+
+    @Override
+    public Optional<Schedule> update(Schedule schedule) {
+        Optional<Schedule> opt =
+                em.createQuery("select x from Schedule x where x.id = :id", Schedule.class)
+                        .setParameter("id", schedule.getId())
+                        .getResultStream()
+                        .findFirst();
+        if(opt.isPresent()){
+            em.persist(schedule);
         }
         return opt;
     }
