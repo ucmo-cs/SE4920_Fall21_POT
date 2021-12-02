@@ -36,19 +36,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<User> findAll() {
         return userRepository.getAllUsers();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Optional<User> findById(int id) {
         return userRepository.getUserById(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Optional<User> findByUsername(String username) {
         return userRepository.getUserByUsername(username);
+    }
+
+    @Transactional
+    public Optional<User> findByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 
     @Transactional
@@ -94,7 +99,6 @@ public class UserService {
     @Transactional
     public boolean validateLogin(Credentials creds){
         Optional<User> opt = userRepository.getUserByEmail(creds.getEmail());
-        System.out.println(opt.get().getPassword() + ": pass1  ___ pass2 :" + creds.getPassword());
         if(!opt.isPresent()){
             return false;
         }

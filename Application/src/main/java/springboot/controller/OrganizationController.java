@@ -29,9 +29,6 @@ public class OrganizationController {
     @CrossOrigin
     @GetMapping("/organization")
     public ResponseEntity<?> listAll(){
-//        List<Organization> list = new ArrayList<>();
-//        organizationService.getAll().iterator().forEachRemaining(list::add);
-
         return new ResponseEntity<>(organizationService.getAll(), HttpStatus.OK);
     }
 

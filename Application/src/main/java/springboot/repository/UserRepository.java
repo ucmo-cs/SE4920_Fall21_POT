@@ -35,10 +35,11 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        Optional<User> opt = Optional.of(
+        Optional<User> opt =
                 em.createQuery("select x from User x where x.email = :email", User.class)
                 .setParameter("email", email)
-                .getSingleResult());
+                .getResultStream()
+                .findFirst();
         return opt;
     }
 

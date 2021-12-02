@@ -24,7 +24,7 @@ function Login(props) {
     console.log(e.target.value + " value " );
   }
 
-  const submitBook =(e)=>{
+  const submitLogin =(e)=>{
     e.preventDefault();
     fetch("http://localhost:8080/login", {
       method:"POST",
@@ -39,10 +39,11 @@ function Login(props) {
       })
     .then(res=>{
       console.log(res)
-      if(res!==null){
+      if(res!==false){
+        window.name = res;
         props.history.push('/home');
       }else{
-        alert('fails');
+        alert('Email and/or password is incorrect, try again.');
       }
     
     });
@@ -51,7 +52,7 @@ function Login(props) {
 
   return (
     <div>
-<Form onSubmit = {submitBook}>
+<Form onSubmit = {submitLogin}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email</Form.Label>
     <Form.Control type="text" placeholder="email" onChange = {changeValue} name="email" />

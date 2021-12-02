@@ -26,16 +26,15 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody Credentials creds) {
         boolean valid = userService.validateLogin(creds);
         if(valid){
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            int id = userService.findByEmail(creds.getEmail()).get().getId();
+            return new ResponseEntity<>(id, HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @PostMapping("/user")
     public ResponseEntity<?> saveUser(@RequestBody User user) {
-//        List<User> list = new ArrayList<>();
-//        userService.findAll().iterator().forEachRemaining(list::add);
-//        return list;
+
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
