@@ -49,4 +49,9 @@ public class ScheduleService {
     public Optional<Schedule> updateSchedule(Schedule schedule){
         return scheduleRepository.update(schedule);
     }
+
+    @Transactional
+    public Optional<Schedule> getUsersMostRecentSchedule(int userId) {
+        return scheduleRepository.getUsersMostRecentSchedule(userId);
+    }
 }

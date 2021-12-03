@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "schedule")
-public class Schedule {
+public class Schedule implements Comparable {
 
     /*
     Id : int
@@ -88,5 +88,21 @@ public class Schedule {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Schedule){
+            Schedule s = (Schedule) o;
+            int comp = s.start_time.compareTo(this.start_time);
+            if(comp<0){
+                return -1;
+            }
+            else if(comp>0){
+                return 1;
+            }
+            else return 0;
+        }
+        return -1;
     }
 }

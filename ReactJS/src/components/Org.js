@@ -17,7 +17,6 @@ function Org(props) {
         <Card.Body>
           <Card.Title>
                {id}  :  {name}   :  {owner_id}   :  {description}
-     
            </Card.Title>
         </Card.Body>
       </Card>

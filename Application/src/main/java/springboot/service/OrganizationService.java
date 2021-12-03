@@ -59,7 +59,7 @@ public class OrganizationService {
     }
 
     @Transactional
-    public Optional<User> addUserToOrganization(Org_User orgUser) {
+    public Optional<Org_User> addUserToOrganization(Org_User orgUser) {
         return org_userRepository.addUserToOrganization(orgUser);
     }
 

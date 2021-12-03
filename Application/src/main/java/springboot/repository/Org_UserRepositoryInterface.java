@@ -12,7 +12,7 @@ public interface Org_UserRepositoryInterface{
 
     List<Organization> getOrganizationByUserId(int id);
     List<User> getUsersByOrganizationId(int id);
-    Optional<User> addUserToOrganization(Org_User orgUser);
+    Optional<Org_User> addUserToOrganization(Org_User orgUser);
     Optional<User> deleteUserFromOrganization(Org_User orgUser);
 
 }

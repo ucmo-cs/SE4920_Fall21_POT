@@ -19,7 +19,7 @@ function HeaderNav(props) {
         {//<Link to="/home" className="navbar-brand">Home</Link>
         }
         <Link to="/login" className="navbar-link">Login</Link>
-        <Link to="/account" className="navbar-link">Account</Link>
+        {/* <Link to="/account" className="navbar-link">Account</Link> */}
         {//<Link to="/calendar" className="navbar-brand">Calendar</Link>
         }
         

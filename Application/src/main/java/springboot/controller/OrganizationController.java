@@ -60,15 +60,15 @@ public class OrganizationController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @GetMapping("/organization/{orgName}")
-    public ResponseEntity<?> getByName(@PathVariable String orgName){
-        List<Organization> list = organizationService.findByName(orgName);
-        if(list.size()==0){
-            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
+//    @CrossOrigin
+//    @GetMapping("/organization/{orgName}")
+//    public ResponseEntity<?> getByName(@PathVariable String orgName){
+//        List<Organization> list = organizationService.findByName(orgName);
+//        if(list.size()==0){
+//            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(list, HttpStatus.OK);
+//    }
 
     @CrossOrigin
     @GetMapping("/organization/{id}/users")
@@ -104,7 +104,8 @@ public class OrganizationController {
     @CrossOrigin
     @PostMapping("/organization/user")
     public ResponseEntity<?> addUserToOrganization(@RequestBody Org_User orgUser) {
-        Optional<User> opt = organizationService.addUserToOrganization(orgUser);
+        System.out.println(orgUser);
+        Optional<Org_User> opt = organizationService.addUserToOrganization(orgUser);
         if(!opt.isPresent()){
             return new ResponseEntity<>(opt, HttpStatus.NOT_ACCEPTABLE);
         }

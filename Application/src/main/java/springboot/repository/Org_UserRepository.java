@@ -1,5 +1,6 @@
 package springboot.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import springboot.domain.Org_User;
 import springboot.domain.Organization;
@@ -11,8 +12,10 @@ import java.util.Optional;
 
 public class Org_UserRepository extends RepositoryGeneric implements Org_UserRepositoryInterface{
 
-    private OrganizationRepository organizationRepository;
-    private UserRepository userRepository;
+    @Autowired
+    private OrganizationRepositoryInterface organizationRepository;
+    @Autowired
+    private UserRepositoryInterface userRepository;
 
     public Org_UserRepository(EntityManager em) {
         super(em);
@@ -51,9 +54,9 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
     }
 
     @Override
-    public Optional<User> addUserToOrganization(Org_User orgUser) {
+    public Optional<Org_User> addUserToOrganization(Org_User orgUser) {
         em.persist(orgUser);
-        return userRepository.getUserById(orgUser.getUserId());
+        return Optional.of(orgUser);
     }
 
     @Override

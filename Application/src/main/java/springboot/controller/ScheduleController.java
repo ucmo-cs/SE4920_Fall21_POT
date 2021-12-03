@@ -61,6 +61,16 @@ public class ScheduleController {
     }
 
     @CrossOrigin
+    @GetMapping("/schedule/user/{userId}/closest")
+    public ResponseEntity<?> getScheduleClosest(@PathVariable int userId){
+        Optional<Schedule> opt = scheduleService.getUsersMostRecentSchedule(userId);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @PatchMapping("/schedule/{id}")
     public ResponseEntity<?> update(@RequestBody Schedule schedule){
         Optional<Schedule> opt = scheduleService.updateSchedule(schedule);

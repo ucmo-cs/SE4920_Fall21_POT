@@ -14,5 +14,5 @@ public interface ScheduleRepositoryInterface {
     Optional<Schedule> addSchedule(Schedule schedule);
     Optional<Schedule> deleteSchedule(int id);
     Optional<Schedule> update(Schedule schedule);
-
+    Optional<Schedule> getUsersMostRecentSchedule(int userId);
 }

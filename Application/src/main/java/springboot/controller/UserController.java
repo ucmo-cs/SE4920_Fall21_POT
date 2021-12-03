@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @CrossOrigin
-    @GetMapping("/user")
+    @GetMapping("/users")
     public ResponseEntity<?> listUsers() {
         List<User> list = userService.findAll();
         if(list.size()==0){
@@ -55,24 +55,25 @@ public class UserController {
         if(!opt.isPresent()){
             return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
         }
+        System.out.println(opt.get());
         return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @GetMapping("/user/{username}")
-    public ResponseEntity<?> getUser(@PathVariable String username) {
-        Optional<User> opt = userService.findByUsername(username);
-        if(!opt.isPresent()){
-            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(opt, HttpStatus.OK);
-    }
+//    @CrossOrigin
+//    @GetMapping("/user/{username}")
+//    public ResponseEntity<?> getUser(@PathVariable String username) {
+//        Optional<User> opt = userService.findByUsername(username);
+//        if(!opt.isPresent()){
+//            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(opt, HttpStatus.OK);
+//    }
 
     @CrossOrigin
     @GetMapping("/user/{id}/organization")
     public ResponseEntity<?> getOrganization(@PathVariable int id){
         List<Organization> list = userService.getOrganizationByUserId(id);
-        if(list.size()==0){
+        if(list!=null){
             return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);

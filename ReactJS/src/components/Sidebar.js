@@ -10,6 +10,7 @@ function Sidebar(props) {
       <ProSidebar >
   <Menu iconShape="square">
     <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/home" className="sidebar-options">Home</Link></MenuItem>
+    <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/account" className="sidebar-options">Account</Link></MenuItem>
     <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/calendar" className="sidebar-options">Calendar</Link></MenuItem>
     <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/organization" className="sidebar-options">Organization</Link></MenuItem>
     

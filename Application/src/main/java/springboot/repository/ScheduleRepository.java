@@ -6,6 +6,7 @@ import springboot.domain.Schedule;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ScheduleRepository extends RepositoryGeneric implements ScheduleRepositoryInterface{
 
@@ -66,5 +67,12 @@ public class ScheduleRepository extends RepositoryGeneric implements ScheduleRep
             em.persist(schedule);
         }
         return opt;
+    }
+
+    @Override
+    public Optional<Schedule> getUsersMostRecentSchedule(int userId) {
+        List<Schedule> list = this.getSchedulesByUserId(userId);
+        List<Schedule> sorted = list.stream().sorted().collect(Collectors.toList());
+        return Optional.of(sorted.get(0));
     }
 }
