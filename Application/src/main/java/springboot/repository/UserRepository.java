@@ -2,6 +2,7 @@ package springboot.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import springboot.domain.Organization;
+import springboot.domain.Schedule;
 import springboot.domain.User;
 
 import javax.persistence.EntityManager;
@@ -67,6 +68,19 @@ public class UserRepository extends RepositoryGeneric implements UserRepositoryI
                         .findFirst();
         if(opt.isPresent()){
             em.remove(opt.get());
+        }
+        return opt;
+    }
+
+    @Override
+    public Optional<User> update(User userUpdate) {
+        Optional<User> opt =
+                em.createQuery("select x from User x where x.id = :id", User.class)
+                        .setParameter("id", userUpdate.getId())
+                        .getResultStream()
+                        .findFirst();
+        if(opt.isPresent()){
+            em.persist(userUpdate);
         }
         return opt;
     }

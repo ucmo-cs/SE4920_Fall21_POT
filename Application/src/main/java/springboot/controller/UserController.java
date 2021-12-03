@@ -37,7 +37,6 @@ public class UserController {
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    ////////////////VVVVVV
 
     @CrossOrigin
     @PostMapping("/user")
@@ -51,84 +50,123 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("/user/{id}")
-    public User getOne(@PathVariable int id) {
-        Optional<User> optionalUser = userService.findById(id);
-        return optionalUser.isPresent() ? optionalUser.get() : null;
+    public ResponseEntity<?> getOne(@PathVariable int id) {
+        Optional<User> opt = userService.findById(id);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("/user/{username}")
-    public User getUser(@PathVariable String username) {
-        Optional<User> optionalUser = userService.findByUsername(username);
-        return optionalUser.isPresent() ? optionalUser.get() : null;
+    public ResponseEntity<?> getUser(@PathVariable String username) {
+        Optional<User> opt = userService.findByUsername(username);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("/user/{id}/organization")
-    public List<Organization> getOrganization(@PathVariable int id){
-        Optional<User> optionalUser = userService.findById(id);
-        User user = optionalUser.isPresent() ? optionalUser.get() : null;
-        List<Organization> org = userService.getOrganizationByUserId(user.getId());
-        return org;
+    public ResponseEntity<?> getOrganization(@PathVariable int id){
+        List<Organization> list = userService.getOrganizationByUserId(id);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+
     }
 
     @CrossOrigin
     @GetMapping("/user/{id}/supervisor")
-    public User getSupervisor(@PathVariable int id){
-        Optional<User> optionalUser = userService.findById(id);
-        User user = optionalUser.isPresent() ? optionalUser.get() : null;
-        Optional<User> optionalSupervisor = userService.getSupervisorOfId(user.getId());
-        return optionalSupervisor.isPresent() ? optionalSupervisor.get() : null;
+    public ResponseEntity<?> getSupervisor(@PathVariable int id){
+        Optional<User> optU = userService.findById(id);
+        User user = optU.isPresent() ? optU.get() : null;
+        if(user==null){
+            return new ResponseEntity<>(optU, HttpStatus.NOT_FOUND);
+        }
+        Optional<User> optS = userService.getSupervisorOfId(user.getId());
+        if(!optS.isPresent()){
+            return new ResponseEntity<>(optS, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(optS, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("/user/{id}/subordinates")
-    public List<User> getSubordinates(@PathVariable int id){
-        Optional<User> optionalUser = userService.findById(id);
-        User user = optionalUser.isPresent() ? optionalUser.get() : null;
-        List<User> subordinates = new ArrayList<>();
-        userService.getSubordinatesOfId(user.getId()).iterator().forEachRemaining(subordinates::add);
-        return subordinates;
+    public ResponseEntity<?> getSubordinates(@PathVariable int id){
+        Optional<User> optU = userService.findById(id);
+        User user = optU.isPresent() ? optU.get() : null;
+        if(user==null){
+            return new ResponseEntity<>(optU, HttpStatus.NOT_FOUND);
+        }
+        List<User> list = userService.getSubordinatesOfId(user.getId());
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @CrossOrigin
     @PostMapping("/user/{id}")
-    public User update(@RequestBody User userUpdate) {
-        Optional<User> optionalUser = userService.findById(userUpdate.getId());
-        if (optionalUser.isPresent()) {
-            userService.save(userUpdate);
+    public ResponseEntity<?> update(@RequestBody User userUpdate) {
+        Optional<User> opt = userService.update(userUpdate);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
         }
-        return userUpdate;
+        return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
     @CrossOrigin
     @PostMapping("/subordinate")
-    public void addSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
-        userService.addSubordinate(supervisorSubordinate);
+    public ResponseEntity<?> addSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        List<User> list = userService.addSubordinate(supervisorSubordinate);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @CrossOrigin
     @PutMapping("/supervisor")
-    public void addSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
-        userService.addSupervisor(supervisorSubordinate);
+    public ResponseEntity<?> addSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        Optional<User> opt = userService.addSupervisor(supervisorSubordinate);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.OK);
     }
 
     @CrossOrigin
     @DeleteMapping("/user/{id}")
-    public void delete(@PathVariable int id) {
-        userService.deleteById(id);
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        Optional<User> opt = userService.deleteById(id);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
     }
 
     @CrossOrigin
     @DeleteMapping("/subordinate")
-    public void deleteSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
-        userService.deleteSubordinate(supervisorSubordinate);
+    public ResponseEntity<?> deleteSubordinate(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        List<User> list = userService.deleteSubordinate(supervisorSubordinate);
+        if(list.size()==0){
+            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
     }
 
     @CrossOrigin
     @DeleteMapping("/supervisor")
-    public void deleteSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
-        userService.deleteSupervisor(supervisorSubordinate);
+    public ResponseEntity<?> deleteSupervisor(@RequestBody Supervisor_Subordinate supervisorSubordinate) {
+        Optional<User> opt = userService.deleteSupervisor(supervisorSubordinate);
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(opt, HttpStatus.ACCEPTED);
     }
 
 

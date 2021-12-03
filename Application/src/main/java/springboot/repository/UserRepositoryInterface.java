@@ -14,4 +14,5 @@ public interface UserRepositoryInterface{
     List<User> getAllUsers();
     Optional<User> save(User user);
     Optional<User> deleteById(int id);
+    Optional<User> update(User userUpdate);
 }

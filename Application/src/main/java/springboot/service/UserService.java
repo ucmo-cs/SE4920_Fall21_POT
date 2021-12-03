@@ -57,8 +57,8 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteById(int id) {
-        userRepository.deleteById(id);
+    public Optional<User> deleteById(int id) {
+        return userRepository.deleteById(id);
     }
 
     @Transactional
@@ -105,4 +105,8 @@ public class UserService {
         return opt.get().getPassword().equals(creds.getPassword());
     }
 
+    @Transactional
+    public Optional<User> update(User userUpdate) {
+        return userRepository.update(userUpdate);
+    }
 }
