@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./styling.css";
 import Org from "./Org";
+import Sidebar from "./Sidebar";
 
 
 
@@ -22,6 +23,9 @@ function Organizations(props) {
   return (
     
     <div>
+      <div className="left-child">
+        <Sidebar/>  
+      </div>
       {organizations.map(org => <Org key={org.id} org = {org}> </Org>)}      
     </div>
   );

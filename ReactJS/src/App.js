@@ -43,9 +43,9 @@ function App() {
   }*/
 
   return (
-    <div>
-      <div><HeaderNav/></div>
-      <div><Container>
+    <div style={{background:'#67b1e2'}}>
+      <div className="nav-bar"><HeaderNav/></div>
+      <div className="content-box"><Container>
       <Route path="/login" exact={true} component={Login}/>
       <Route path="/home" exact={true} component={Home}/>
       <Route path="/calendar" exact={true} component={Calendar}/>

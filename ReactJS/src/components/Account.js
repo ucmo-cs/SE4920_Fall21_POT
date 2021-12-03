@@ -22,7 +22,7 @@ function gotoUpdate(){
         <h2>Name</h2><div id="name">Hi1</div>
         <h2>Email</h2><div id="email">Hi2</div>
         <h3>Password</h3><div id="password">Hi3</div><br/>
-        <button type="submit" onClick={gotoUpdate}>Change Information</button>
+        <button type="submit" onClick={gotoUpdate} id="change-button">Change Information</button>
       </div>
     </div>
   );

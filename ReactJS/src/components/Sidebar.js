@@ -1,17 +1,17 @@
 import { Navbar } from 'react-bootstrap';
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
+// import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom';
 import './styling.css';
 
 function Sidebar(props) {
   return (
-    <div>
-      <ProSidebar>
+    <div className="sidebar">
+      <ProSidebar >
   <Menu iconShape="square">
-    <MenuItem icon={""}><Link to="/home" className="navbar-brand">Home</Link></MenuItem>
-    <MenuItem icon={""}><Link to="/calendar" className="navbar-brand">Calendar</Link></MenuItem>
-    <MenuItem icon={""}><Link to="/organization" className="navbar-brand">Organization</Link></MenuItem>
+    <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/home" className="sidebar-options">Home</Link></MenuItem>
+    <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/calendar" className="sidebar-options">Calendar</Link></MenuItem>
+    <MenuItem icon={""} style={{listStyle: 'none', fontSize:'large'}}><Link to="/organization" className="sidebar-options">Organization</Link></MenuItem>
     
     {/*<SubMenu title="Components" icon={""}>
       <MenuItem>Component 1</MenuItem>

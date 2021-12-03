@@ -51,22 +51,22 @@ function Login(props) {
   }
 
   return (
-    <div>
-<Form onSubmit = {submitLogin}>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email</Form.Label>
-    <Form.Control type="text" placeholder="email" onChange = {changeValue} name="email" />
-  </Form.Group>
+    <div className="login-box">
+    <Form onSubmit = {submitLogin} style={{width: '40%'}}>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'1.5em'}}>Email</Form.Label>
+        <Form.Control type="text" placeholder="email" onChange = {changeValue} name="email"/>
+      </Form.Group>
 
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="text" placeholder="password" onChange = {changeValue} name="password"/>
-  </Form.Group>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'1.5em'}}>Password</Form.Label>
+        <Form.Control type="text" placeholder="password" onChange = {changeValue} name="password"/>
+      </Form.Group>
 
-  <Button variant="primary" type="submit">
-    Submit  
-  </Button>
-</Form>
+      <Button variant="primary" type="submit" id="login-button">
+        Submit  
+      </Button>
+    </Form>
     </div>
   );
 }

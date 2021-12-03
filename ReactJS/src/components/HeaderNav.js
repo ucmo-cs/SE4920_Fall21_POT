@@ -1,7 +1,8 @@
 import React from "react";
-import '../App.css';
+//import '../App.css';
 import {Container, Nav, Navbar} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import './styling.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,18 +12,18 @@ import {
 
 function HeaderNav(props) {
   return (
-    <div>
-    <Navbar bg="dark" variant="dark">
+    <div className="nav-bar">
+    <Navbar>
       <Container fluid>
-      <Nav className="me-auto">
+      <Nav >
         {//<Link to="/home" className="navbar-brand">Home</Link>
         }
-        <Link to="/login" className="navbar-brand">Login</Link>
-        <Link to="/account" className="navbar-brand">Account</Link>
+        <Link to="/login" className="navbar-link">Login</Link>
+        <Link to="/account" className="navbar-link">Account</Link>
         {//<Link to="/calendar" className="navbar-brand">Calendar</Link>
         }
         
-      </Nav>
+        </Nav>
       </Container>
     </Navbar>
     

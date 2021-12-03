@@ -65,6 +65,7 @@ function Calendar(props) {
       <Sidebar/>
       </div>
       <div className="right-child">
+        <div id="cal-box">
       <Cal
         //onChange={onChange}
         value={value}
@@ -72,7 +73,9 @@ function Calendar(props) {
         maxDate= {new Date(far_yyyy+'-'+farthest+'-'+dd)}
         onClickDay={value,onDay}
       />
-      <br/>Meeting time: 
+      </div>
+      <div id="meeting-info">
+      <br/>Meeting time: <p></p>
       <select name="time_hours" id="time_hours" onChange={time_change}>
         <option value="8">8</option>
         <option value="9">9</option>
@@ -93,7 +96,8 @@ function Calendar(props) {
       <br/>
       <div id='clicked_date'>{mm+"/"+dd +"/"+ yyyy}</div>
       <div id='clicked_time'>8:00AM</div>
-      <button type="submit" onClick={create_meeting}>Create Meeting</button>
+      </div>
+      <button type="submit" onClick={create_meeting} id="meeting-button">Create Meeting</button>
       </div>
       
     </div>
