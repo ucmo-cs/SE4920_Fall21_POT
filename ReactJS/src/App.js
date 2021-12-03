@@ -19,6 +19,7 @@ import Meeting from "./components/Meeting";
 import Update from "./components/Update";
 import Organizations from "./components/Organizations";
 import UsersOrg from "./components/UsersOrg";
+import Schedule from "./components/Schedule";
 
 /*function setToken(userToken) {
   console.log("tokenTEst")
@@ -55,6 +56,7 @@ function App() {
       <Route path="/meeting" exact={true} component={Meeting}/>
       <Route path="/account/update" exact={true} component={Update}/>
       <Route path="/organization" exact={true} component={UsersOrg}/>
+      <Route path="/schedule" exact={true} component={Schedule}/>
       
       </Container></div>
     </div>

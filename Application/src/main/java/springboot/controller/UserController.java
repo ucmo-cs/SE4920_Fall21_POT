@@ -72,11 +72,11 @@ public class UserController {
     @CrossOrigin
     @GetMapping("/user/{id}/organization")
     public ResponseEntity<?> getOrganization(@PathVariable int id){
-        List<Organization> list = userService.getOrganizationByUserId(id);
-        if(list!=null){
-            return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        Optional<Organization> opt = userService.getOrganizationByUserId(id);
+        if(opt!=null){
+            return new ResponseEntity<>(opt, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity<>(opt, HttpStatus.OK);
 
     }
 

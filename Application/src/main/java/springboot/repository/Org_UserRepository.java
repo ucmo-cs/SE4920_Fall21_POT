@@ -22,19 +22,24 @@ public class Org_UserRepository extends RepositoryGeneric implements Org_UserRep
     }
 
     @Override
-    public List<Organization> getOrganizationByUserId(int id) {
-        List<Org_User> a = em.createQuery("select x from Org_User x where x.user_id = :user_id", Org_User.class)
+    public Optional<Organization> getOrganizationByUserId(int id) {
+        Optional<Org_User> a = em.createQuery("select x from Org_User x where x.user_id = :user_id", Org_User.class)
                 .setParameter("user_id", id)
-                .getResultList();
-        List<Organization> b = null;
-        for(int x = 0; x<a.size(); x++){
-            Org_User c = a.get(x);
-            int d = c.getOrgId();
-            Optional<Organization> e = organizationRepository.getOrganizationById(d);
-            Organization f = e.isPresent() ? e.get() : null;
-            b.add(f);
+                .getResultStream()
+                .findFirst();
+        System.out.println(a);
+        if(a!=null && a.isPresent()){
+            return organizationRepository.getOrganizationById(a.get().getOrgId());
         }
-        return b;
+//        List<Organization> b = null;
+//        for(int x = 0; x<a.size(); x++){
+//            Org_User c = a.get(x);
+//            int d = c.getOrgId();
+//            Optional<Organization> e = organizationRepository.getOrganizationById(d);
+//            Organization f = e.isPresent() ? e.get() : null;
+//            b.add(f);
+//        }
+        return null;
     }
 
     @Override

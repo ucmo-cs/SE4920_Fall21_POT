@@ -73,6 +73,9 @@ public class ScheduleRepository extends RepositoryGeneric implements ScheduleRep
     public Optional<Schedule> getUsersMostRecentSchedule(int userId) {
         List<Schedule> list = this.getSchedulesByUserId(userId);
         List<Schedule> sorted = list.stream().sorted().collect(Collectors.toList());
+        if(sorted.size()==0){
+            return Optional.of(null);
+        }
         return Optional.of(sorted.get(0));
     }
 }

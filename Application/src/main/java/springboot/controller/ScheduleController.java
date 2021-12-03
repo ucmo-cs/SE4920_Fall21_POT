@@ -54,7 +54,7 @@ public class ScheduleController {
     @GetMapping("/schedule/user/{userId}")
     public ResponseEntity<?> getSchedules(@PathVariable int userId){
         List<Schedule> list = scheduleService.getSchedulesByUserId(userId);
-        if(list.size()==0){
+        if(list==null){
             return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
